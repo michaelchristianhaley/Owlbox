@@ -11,4 +11,4 @@ FIXME replace with durable project preferences, settings values, connection sett
 ## Additions
 
 --- Newest Addition ---
-### History with date then time in the MM/DD/YY hh:mm:ss format
+### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format

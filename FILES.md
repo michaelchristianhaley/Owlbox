@@ -6,6 +6,10 @@ This file describes Owlbox files and their roles.
 
 ## Deliverable Files
 
+For a repository adopting Owlbox, these are the files an Owlbox contains.
+
+In this repository, the files with these names are the Owlbox repository's own Owlbox. They exist for project continuity when maintaining the Owlbox tool project.
+
 ### `OWLBOX.md`
 
 Generated combined continuity view.
@@ -55,7 +59,7 @@ After adding a handoff file to `LEGACY.md`, evaluate it and place relevant activ
 
 ## Owlbox Repository Support Files
 
-These files support publishing and integration. They are not part of the required Owlbox deliverable for every adopting repository.
+These files support publishing and integration for the Owlbox tool project.
 
 ### `README.md`
 
@@ -72,6 +76,10 @@ Descriptions of Owlbox files and supporting repository files.
 ### `TEMPLATES.md`
 
 Template descriptions, required headings, section order, and usage rules.
+
+### `DELIVERABLES.md`
+
+Owlbox deliverable files, destinations, activation, and verification.
 
 ### `BUILDABOX.md`
 
@@ -98,3 +106,4 @@ Codex skill implementation of Owlbox.
 This is how Owlbox is packaged for Codex as an operational skill.
 
 The Owlbox repository specification must be capable of reproducing this skill exactly.
+

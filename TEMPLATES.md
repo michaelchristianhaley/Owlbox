@@ -14,6 +14,7 @@ Use templates when creating a new Owlbox or when repairing a malformed Owlbox so
 - Replace placeholders with project-specific content.
 - Do not leave `FIXME` placeholders in a completed Owlbox.
 - Use date then time for history entries: `MM/DD/YY hh:mm:ss`.
+- Template files may contain a `FIXME` timestamp-heading placeholder. Completed OWL files should replace that placeholder with `### Entries`.
 - Do not paraphrase template language during copy or publication work unless an intentional spec change requires it.
 
 ## `OUTLINE.template.md`
@@ -28,12 +29,12 @@ Required structure:
 ## Plan
 
 --- Newest Plan Event ---
-### History with date then time in the MM/DD/YY hh:mm:ss format
+### Entries
 
 ## Journal
 
 --- Newest Journal Event ---
-### History with date then time in the MM/DD/YY hh:mm:ss format
+### Entries
 ```
 
 `Plan` describes the current work ahead.
@@ -56,7 +57,7 @@ Required structure:
 ## Additions
 
 --- Newest Addition ---
-### History with date then time in the MM/DD/YY hh:mm:ss format
+### Entries
 ```
 
 `Current Plan` describes the project's present long-term direction.
@@ -79,7 +80,7 @@ Required structure:
 ## Log
 
 --- Newest OWL Event ---
-### History with date then time in the MM/DD/YY hh:mm:ss format
+### Entries
 
 ### Handoff Files
 
@@ -91,3 +92,4 @@ Required structure:
 `Handoff Files` accepts entire handoff files when full context transfer matters. After adding a handoff file, evaluate it and place relevant active information in `OUTLINE.md` Plan, `OUTLINE.md` Journal, `WISDOM.md` Current Plan, and `WISDOM.md` Preferences as needed. If the handoff does not affect those sections now, preserve it only in `LEGACY.md`.
 
 `Original Plan` preserves the original project vision.
+

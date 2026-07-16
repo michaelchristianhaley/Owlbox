@@ -17,6 +17,7 @@ The Owlbox deliverable is the Owlbox file set:
 
 - `SOP.md`: procedure and operating specification.
 - `FILES.md`: file descriptions.
+- `DELIVERABLES.md`: deliverable files, destinations, activation, and verification.
 - `TEMPLATES.md`: template structure and usage.
 - `BUILDABOX.md`: build process and scripts.
 - `VISION.md`: generated full publication context.
@@ -34,4 +35,3 @@ powershell -ExecutionPolicy Bypass -File scripts\build-all.ps1
 ```
 
 This regenerates `OWLBOX.md`, `README.md`, and `VISION.md`.
-# Owlbox

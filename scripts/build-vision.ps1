@@ -5,6 +5,7 @@ $sources = @(
   "PROJECT.md",
   "SOP.md",
   "FILES.md",
+  "DELIVERABLES.md",
   "TEMPLATES.md",
   "BUILDABOX.md",
   "templates/OUTLINE.template.md",
@@ -41,4 +42,3 @@ foreach ($source in $sources) {
 }
 
 $content | Set-Content (Join-Path $root "VISION.md") -Encoding utf8
-

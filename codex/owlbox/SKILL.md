@@ -13,6 +13,8 @@ Owlbox belongs inside the repository so its continuity records are versioned, re
 
 Maintaining Owlbox is a part of completing project work. A project with stale continuity is incomplete.
 
+An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files: `OUTLINE.md`, `WISDOM.md`, and `LEGACY.md`. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, and a documented build or maintenance method.
+
 ## Procedure
 
 1. Discover Owlbox
@@ -24,7 +26,7 @@ Maintaining Owlbox is a part of completing project work. A project with stale co
 7. When updating WISDOM.md, preserve and maintain the Preferences section.
 8. Add durable preferences as they are discovered. Do not remove preferences without asking.
 
-The assistant is expected to implement Owlbox with every titled project.
+The assistant is expected to implement the supported Owlbox-enabled form with every titled project.
 
 ## Structure
 
@@ -36,6 +38,8 @@ Owlbox is stored in the root of the Git repository:
 - `owlbox/LEGACY.md`
 
 These files are committed to Git with the project.
+
+The three files inside `owlbox/` are the OWL files. `OWLBOX.md` is the generated combined view of the OWL files and is not itself an OWL file.
 
 ## Canonical Files
 

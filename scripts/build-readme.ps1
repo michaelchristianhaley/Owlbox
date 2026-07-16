@@ -23,6 +23,7 @@ $content = @(
   "",
   '- `SOP.md`: procedure and operating specification.',
   '- `FILES.md`: file descriptions.',
+  '- `DELIVERABLES.md`: deliverable files, destinations, activation, and verification.',
   '- `TEMPLATES.md`: template structure and usage.',
   '- `BUILDABOX.md`: build process and scripts.',
   '- `VISION.md`: generated full publication context.',

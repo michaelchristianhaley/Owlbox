@@ -10,6 +10,7 @@ This repository publishes Owlbox, a repository-local continuity system.
 - `PROJECT.md`: project charter.
 - `SOP.md`: procedure and operating specification.
 - `FILES.md`: file descriptions.
+- `DELIVERABLES.md`: Owlbox deliverable files, destinations, activation, and verification.
 - `TEMPLATES.md`: template documentation.
 - `BUILDABOX.md`: build documentation.
 - `VISION.md`: generated concatenation of Owlbox project files.
@@ -24,4 +25,4 @@ This repository publishes Owlbox, a repository-local continuity system.
 - Do not confuse `VISION.md` with `OWLBOX.md`.
 - Do not make original edits directly in generated files.
 - Keep the Owlbox deliverable separate from repository support files.
-
+- Keep deliverables, destinations, activation, and verification explicit.
