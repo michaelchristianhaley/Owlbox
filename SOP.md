@@ -1,0 +1,141 @@
+# SOP.md
+
+## Purpose
+
+Owlbox provides durable project continuity.
+
+It preserves the information required for another competent assistant or human to understand a project, continue the work, and understand how the project reached its current state.
+
+Owlbox belongs inside the repository it describes. It is part of the project, not external documentation.
+
+Maintaining Owlbox is part of completing project work. A project with stale continuity is incomplete.
+
+## Procedure
+
+1. Discover whether the repository already has an Owlbox.
+2. Read `OWLBOX.md` for a combined view when it is current.
+3. Read or edit the canonical source file that owns the information.
+4. Never make original edits directly in `OWLBOX.md`.
+5. Regenerate `OWLBOX.md` after canonical source changes.
+6. Validate generated files in proportion to risk.
+7. Preserve and maintain `WISDOM.md` Preferences.
+8. Add durable preferences as they are discovered.
+9. Do not remove preferences without asking the user.
+10. Preserve entire handoff files in `LEGACY.md` when full context transfer matters, then evaluate them for active or durable information that belongs in other Owlbox sections.
+
+## Structure
+
+The Owlbox deliverable is stored in the root of a Git repository:
+
+- `OWLBOX.md`
+- `owlbox/OUTLINE.md`
+- `owlbox/WISDOM.md`
+- `owlbox/LEGACY.md`
+
+Supporting integration files may exist in the Owlbox repository, but they are not part of the required deliverable for projects that adopt Owlbox.
+
+## Canonical Files
+
+The canonical Owlbox source files are:
+
+- `owlbox/OUTLINE.md`
+- `owlbox/WISDOM.md`
+- `owlbox/LEGACY.md`
+
+`OWLBOX.md` is generated from those canonical files and is not edited directly.
+
+## File Formats
+
+Owlbox source files use stable Markdown headings.
+
+Before creating or restructuring a source file, use the matching template:
+
+- `templates/OUTLINE.template.md`
+- `templates/WISDOM.template.md`
+- `templates/LEGACY.template.md`
+
+Preserve heading names, section order, chronology direction, and human-readable formatting.
+
+History entries use date then time in this format:
+
+```text
+MM/DD/YY hh:mm:ss
+```
+
+## Building an Owlbox in a Repository
+
+To add Owlbox to a repository:
+
+1. Create `owlbox/`.
+2. Create `owlbox/OUTLINE.md` from `templates/OUTLINE.template.md`.
+3. Create `owlbox/WISDOM.md` from `templates/WISDOM.template.md`.
+4. Create `owlbox/LEGACY.md` from `templates/LEGACY.template.md`.
+5. Fill the template placeholders with project-specific content.
+6. Add a build script that generates `OWLBOX.md` from the canonical sources.
+7. Run the build script.
+8. Commit the canonical files and generated `OWLBOX.md` together.
+
+## Validation
+
+Validate generated files in proportion to risk:
+
+- Ordinary content edits need lightweight marker checks.
+- Format changes need structural checks.
+- Generator, encoding, or template changes need full source-containment checks.
+
+For ordinary content edits, confirm that:
+
+- the build script ran successfully;
+- `OWLBOX.md` contains the expected new marker text;
+- changed files match the intended scope.
+
+For structural edits, confirm that:
+
+- required headings exist;
+- source order is preserved;
+- `OWLBOX.md` includes `OUTLINE.md`, `WISDOM.md`, and `LEGACY.md` in that order.
+
+For generator, encoding, or template edits, confirm that:
+
+- generated content matches the canonical sources;
+- encoding is deliberate;
+- no canonical content is dropped;
+- the generator remains simple enough to audit.
+
+## Handoff Files
+
+`LEGACY.md` explicitly accepts entire handoff files when preserving full transfer context matters.
+
+After adding a handoff file to `LEGACY.md`, evaluate it and place relevant information where it belongs when it is currently useful:
+
+- active work ahead goes to `OUTLINE.md` Plan;
+- recent active events go to `OUTLINE.md` Journal;
+- long-term direction goes to `WISDOM.md` Current Plan;
+- durable settings, paths, conventions, policies, devices, and preferences go to `WISDOM.md` Preferences;
+- permanent history and the raw handoff remain in `LEGACY.md`.
+
+If the handoff is not currently relevant to Plan, Journal, Current Plan, or Preferences, preserve it in `LEGACY.md` without forcing extra entries elsewhere.
+
+## Building and Using Owlbox as a Codex Skill
+
+The Owlbox Codex skill is the operational implementation of this specification for Codex.
+
+The Owlbox specification must be capable of reproducing the Codex Owlbox skill exactly. The repository copy in `codex/owlbox/` is the distributable skill package, and its language should not be paraphrased during copy or publication work.
+
+The skill should:
+
+- trigger when a repository contains `OWLBOX.md`, `owlbox/OUTLINE.md`, `owlbox/WISDOM.md`, or `owlbox/LEGACY.md`;
+- trigger when the user asks to create, read, update, reconcile, or repair Owlbox files;
+- require canonical source edits before regenerating `OWLBOX.md`;
+- preserve `WISDOM.md` Preferences;
+- treat Owlbox as repository-local continuity, not external notes.
+
+The skill folder should contain:
+
+- `SKILL.md`
+- `assets/OUTLINE.template.md`
+- `assets/WISDOM.template.md`
+- `assets/LEGACY.template.md`
+- `scripts/build-owlbox.ps1`
+
+To install the skill for Codex, copy or sync `codex/owlbox/` into the user's Codex skills directory.
