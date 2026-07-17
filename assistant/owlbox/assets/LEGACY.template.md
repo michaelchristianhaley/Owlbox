@@ -11,7 +11,7 @@ originalPlan is the Project Seed, and may be written at this initialization of t
 --- Newest OWL Event ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
-Legacy Log is permanent project history. Log may be written to at will. Log shall never have its values changed or deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
+Legacy Log is historical provenance and disaster recovery material: the sacrosanct heart of the program, but not an ordinary source of truth for current plan, state, or preferences. Log may be written to at will. Log shall never have its values changed or deleted. Use Log to reconstruct state only when the rest of the Owlbox system has failed or been lost. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
 
 ### Handoff Files
 

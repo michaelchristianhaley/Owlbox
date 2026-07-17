@@ -2,178 +2,69 @@
 
 ## Purpose
 
-Owlbox provides durable project continuity.
+Owlbox is repository-local project continuity. It preserves enough active state, durable knowledge, preferences, and history for another competent human or assistant to continue the project.
 
-It preserves the information required for another competent assistant or human to understand a project, continue the work, and understand how the project reached its current state.
+## State Model
 
-Owlbox belongs inside the repository it describes. It is part of the project, not external documentation.
+`Owlbox` = the three OWL files in `owlbox/`.
 
-Maintaining Owlbox is part of completing project work. A project with stale continuity is incomplete.
+`Owlbox-enabled` = Owlbox + generated `HOOT.md` + `scripts/hoot-hoot.ps1`.
 
-## Procedure
+`Owlbox-enabled, assisted` = Owlbox-enabled + the four Owlbox skills.
 
-1. Discover whether the repository already has an Owlbox.
-2. Read `OWLBOX.md` for a combined view when it is current.
-3. Read or edit the canonical source file that owns the information.
-4. Never make original edits directly in `OWLBOX.md`.
-5. Regenerate `OWLBOX.md` after canonical source changes.
-6. Validate generated files in proportion to risk.
-7. Preserve and maintain `WISDOM.md` Preferences.
-8. Add durable preferences as they are discovered.
-9. Do not remove preferences without asking the user.
-10. Preserve entire handoff files in `LEGACY.md` when full context transfer matters, then evaluate them for active or durable information that belongs in other Owlbox sections.
+Installed deliverables describe the containing repository. A nested repository may maintain its own Owlbox for its own scope.
 
-## Structure
+## Operation
 
-The Owlbox deliverable is stored in the root of a Git repository:
+1. Read current `HOOT.md`.
+2. Edit the OWL file that owns the information.
+3. Follow that file's permanent header and file-specific skill.
+4. Regenerate `HOOT.md`.
+5. Commit changed OWL files and `HOOT.md` together.
 
-- `OWLBOX.md`
-- `owlbox/OUTLINE.md`
-- `owlbox/WISDOM.md`
-- `owlbox/LEGACY.md`
+Never make original edits in generated files.
 
-Supporting integration files may exist in the Owlbox repository to document and operate the system.
-
-The Owlbox repository's own `OWLBOX.md` and `owlbox/` files are project continuity for maintaining the Owlbox tool project itself.
-
-Installed Owlbox deliverables create the Owlbox for the containing project. They do not create a nested Owlbox inside the installed Owlbox file set. Nested Owlboxes are for nested repository scopes, such as a cloned or embedded tool repository that maintains its own continuity.
-
-An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, a documented build or maintenance method, and, for Codex-assisted use, the four Owlbox skills.
-
-## Deliverable Method
-
-Owlbox uses the same method shape as other deliverable repositories:
-
-1. Get the Owlbox repository.
-2. Copy or create the Owlbox deliverable files at their documented destinations.
-3. Run the documented activation/build step.
-4. Verify that the expected files exist and generated files contain the canonical source content.
-
-See `DELIVERABLES.md` for the concrete destinations and verification checks.
-
-## Canonical Files
-
-The canonical Owlbox source files are:
-
-- `owlbox/OUTLINE.md`
-- `owlbox/WISDOM.md`
-- `owlbox/LEGACY.md`
-
-These three canonical source files are the OWL files.
-
-`OWLBOX.md` is generated from those canonical files and is not edited directly.
-
-## File Formats
-
-Owlbox source files use stable Markdown headings.
-
-Before creating or restructuring a source file, use the matching template:
-
-- `templates/OUTLINE.template.md`
-- `templates/WISDOM.template.md`
-- `templates/LEGACY.template.md`
-
-Preserve heading names, section order, chronology direction, and human-readable formatting.
-
-History entries use date then time in this format:
-
-```text
-MM/DD/YY hh:mm:ss
-```
-
-## Building an Owlbox in a Repository
-
-To add Owlbox to a repository:
+## Enable a Repository
 
 1. Create `owlbox/`.
-2. Create `owlbox/OUTLINE.md` from `templates/OUTLINE.template.md`.
-3. Create `owlbox/WISDOM.md` from `templates/WISDOM.template.md`.
-4. Create `owlbox/LEGACY.md` from `templates/LEGACY.template.md`.
-5. Fill the template placeholders with project-specific content.
-6. Add a build script that generates `OWLBOX.md` from the canonical sources.
-7. Run the build script.
-8. Commit the canonical files and generated `OWLBOX.md` together.
+2. Create the three OWL files from `templates/`.
+3. Replace all template placeholders.
+4. Copy `scripts/hoot-hoot.ps1`.
+5. Generate `HOOT.md`.
 
-This creates one Owlbox for the target repository.
+The Owlbox skills can create and maintain this implementation, but an Owlbox can exist without assistant skills.
 
-This is Owlbox enablement. Enabling an Owlbox means placing the Owlbox file set into a project and maintaining it. It does not require the Codex Owlbox skill.
+## Transfer
 
-The Codex Owlbox skill can produce an Owlbox when none is present and can maintain an existing Owlbox. It is one implementation path, not the definition of Owlbox. An Owlbox may also be built manually from the templates, generated by scripts, copied from another project, or seeded into an assistant as project context.
+Transfer all three OWL files. Between assistant project windows, also transfer a comprehensive summary of chat history and project status.
 
-The skill is not required for an Owlbox to exist. The skill is one supported method for making and maintaining an Owlbox-enabled project.
+Classify transferred information as follows:
+
+- active work: OUTLINE Plan;
+- recent active events: OUTLINE Journal;
+- durable direction: WISDOM Current Plan;
+- durable settings and preferences: WISDOM Preferences;
+- raw handoff and permanent history: LEGACY Log.
+
+OUTLINE and WISDOM remain the working sources. LEGACY Log remains historical cold storage.
+
+For a project-to-project handoff, generate a complete handoff prompt and a project-seed prompt for the next assistant or project-specific `AGENTS.md`.
+
+## Assisted Use
+
+Assisted use installs all four Owlbox skills:
+
+- `owlbox`
+- `owlbox-outline`
+- `owlbox-wisdom`
+- `owlbox-legacy`
+
+The distributable skill packages live under `assistant/`. Copy them without paraphrasing.
 
 ## Validation
 
-Validate generated files in proportion to risk:
+Validate in proportion to risk:
 
-- Ordinary content edits need lightweight marker checks.
-- Format changes need structural checks.
-- Generator, encoding, or template changes need full source-containment checks.
-
-For ordinary content edits, confirm that:
-
-- the build script ran successfully;
-- `OWLBOX.md` contains the expected new marker text;
-- changed files match the intended scope.
-
-For structural edits, confirm that:
-
-- required headings exist;
-- source order is preserved;
-- `OWLBOX.md` includes `OUTLINE.md`, `WISDOM.md`, and `LEGACY.md` in that order.
-
-For generator, encoding, or template edits, confirm that:
-
-- generated content matches the canonical sources;
-- encoding is deliberate;
-- no canonical content is dropped;
-- the generator remains simple enough to audit.
-
-## Handoff Files
-
-`LEGACY.md` explicitly accepts entire handoff files when preserving full transfer context matters.
-
-After adding a handoff file to `LEGACY.md`, evaluate it and place relevant information where it belongs when it is currently useful:
-
-- active work ahead goes to `OUTLINE.md` Plan;
-- recent active events go to `OUTLINE.md` Journal;
-- long-term direction goes to `WISDOM.md` Current Plan;
-- durable settings, paths, conventions, policies, devices, and preferences go to `WISDOM.md` Preferences;
-- permanent history and the raw handoff remain in `LEGACY.md`.
-
-`LEGACY.md` Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
-
-If the handoff is not currently relevant to Plan, Journal, Current Plan, or Preferences, preserve it in `LEGACY.md` without forcing extra entries elsewhere.
-
-## Building and Using Owlbox as a Codex Skill
-
-The Owlbox Codex skill package is the operational implementation of this specification for Codex.
-
-Building the Owlbox skill is separate from enabling an Owlbox in a project. Building the skill produces a reusable assistant capability. Enabling an Owlbox produces a repository-local continuity file set.
-
-The Owlbox specification must be capable of reproducing the Codex Owlbox skills exactly. The repository copies in `codex/owlbox/`, `codex/owlbox-outline/`, `codex/owlbox-wisdom/`, and `codex/owlbox-legacy/` are the distributable skill packages, and their language should not be paraphrased during copy or publication work.
-
-The main `owlbox` skill should:
-
-- trigger when a repository contains `OWLBOX.md`, `owlbox/OUTLINE.md`, `owlbox/WISDOM.md`, or `owlbox/LEGACY.md`;
-- trigger when the user asks to create, read, update, reconcile, or repair OWL files;
-- require canonical source edits before regenerating `OWLBOX.md`;
-- preserve `WISDOM.md` Preferences;
-- treat Owlbox as repository-local continuity, not external notes.
-
-The file-specific skills should:
-
-- `owlbox-outline`: enforce Plan and History handling for `OUTLINE.md`;
-- `owlbox-wisdom`: enforce currentPlan, Preferences, and Additions handling for `WISDOM.md`;
-- `owlbox-legacy`: enforce Log, Handoffs, and originalPlan handling for `LEGACY.md`.
-
-The main skill folder should contain:
-
-- `SKILL.md`
-- `assets/OUTLINE.template.md`
-- `assets/WISDOM.template.md`
-- `assets/LEGACY.template.md`
-- `scripts/build-owlbox.ps1`
-
-To install the Owlbox skills for Codex, copy or sync all four `codex/owlbox*` skill folders into the user's Codex skills directory.
-
+- ordinary content change: successful generation;
+- structural change: required headings and OWL source order;
+- generator, encoding, or template change: source containment and encoding.

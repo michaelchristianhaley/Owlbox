@@ -13,7 +13,7 @@ This folder contains the canonical Owlbox continuity sources for the Owlbox repo
 ## Rules
 
 - Edit these canonical files first.
-- Do not make original edits directly in root `OWLBOX.md`.
-- After changing canonical OWL files, run `scripts/build-owlbox.ps1` from the repository root.
+- Do not make original edits directly in root `HOOT.md`.
+- After changing canonical OWL files, run `scripts/hoot-hoot.ps1` from the repository root.
 
 
