@@ -26,3 +26,5 @@ Current Plan is durable direction. Preferences are durable project knowledge. Ad
 Record every accepted Preference addition or value change in Additions.
 
 Read the permanent header before editing. Do not perform an edit that conflicts with it; explain the conflict.
+
+After an accepted write, run `scripts/hoot-hoot.ps1` to record the change in LEGACY and regenerate HOOT.

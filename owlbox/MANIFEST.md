@@ -2,18 +2,17 @@
 
 ## Purpose
 
-This folder contains the canonical Owlbox continuity sources for the Owlbox repository itself.
+This folder contains the Owlbox continuity files for the Owlbox repository itself.
 
 ## Contents
 
-- `OUTLINE.md`: active plan and journal.
-- `WISDOM.md`: durable project understanding, preferences, and additions.
-- `LEGACY.md`: permanent project history and original plan.
+- `OUTLINE.md`: editable active Plan and Journal.
+- `WISDOM.md`: editable durable Current Plan, Preferences, and Additions.
+- `LEGACY.md`: generated, add-only record of changes to OUTLINE and WISDOM.
 
 ## Rules
 
-- Edit these canonical files first.
-- Do not make original edits directly in root `HOOT.md`.
-- After changing canonical OWL files, run `scripts/hoot-hoot.ps1` from the repository root.
-
+- Edit only OUTLINE and WISDOM directly.
+- Never edit generated LEGACY or root HOOT directly.
+- After changing OUTLINE or WISDOM, run `scripts/hoot-hoot.ps1` from the repository root.
 

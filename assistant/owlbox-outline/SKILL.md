@@ -23,3 +23,5 @@ Journal items may be written at will. Journal items may never have their values 
 Plan is current work state. Journal is recent active context, not permanent project history.
 
 Read the permanent header before editing. Do not perform an edit that conflicts with it; explain the conflict.
+
+After an accepted write, run `scripts/hoot-hoot.ps1` to record the change in LEGACY and regenerate HOOT.

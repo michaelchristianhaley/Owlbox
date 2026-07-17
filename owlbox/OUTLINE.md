@@ -9,7 +9,7 @@ Journal items may be written at will. Journal items may never have their values 
 
 Maintain Owlbox as a reusable repository-local continuity system with documentation, templates, scripts, and four Owlbox skills.
 
-Complete the Cabbage Soup review of the Owlbox repository. Apply only approved changes, regenerate affected outputs, then stop for approval before reviewing Ledger.
+Finish the Owlbox review before moving to Ledger. The conversion to generated, add-only LEGACY with contextual source diffs and optional root `ORIGINAL.md` is complete.
 
 Preserve the distinctions among Owlbox, Owlbox-enabled, and Owlbox-enabled, assisted projects.
 
@@ -24,6 +24,8 @@ Preserve the distinctions among Owlbox, Owlbox-enabled, and Owlbox-enabled, assi
 - 07/16/26 19:45:00: Began approved terminology and state-model cleanup: `HOOT.md`, `scripts/hoot-hoot.ps1`, `assistant/` skill packages, explicit Owlbox-enabled versus assisted states, and LEGACY Log as disaster recovery material.
 - 07/16/26 20:15:00: Completed the approved Owlbox terminology and state-model cleanup in source files and regenerated repository outputs. The installed Owlbox runtime skills were synced from the repository source packages.
 - 07/16/26 21:44:44: Add audit and changelog coverage for the major Owlbox repository changes before continuing the pre-handoff review sequence.
+- 07/16/26 23:49:28: Convert LEGACY to a generated, add-only OWL file sourced from OUTLINE and WISDOM changes, and move the project seed to optional root `ORIGINAL.md`.
+- 07/16/26 23:54:55: Completed the generated, add-only LEGACY conversion and synchronized the four installed runtime skills with their Owlbox repository sources.
 
 ## Journal
 
@@ -37,3 +39,5 @@ Preserve the distinctions among Owlbox, Owlbox-enabled, and Owlbox-enabled, assi
 - 07/16/26 19:45:00: Applied the approved Owlbox review changes to source files while preserving existing LEGACY Log entries as historical records only.
 - 07/16/26 20:15:00: Rebuilt generated Owlbox outputs and verified source/runtime Owlbox skill hashes match. Remaining review work is to inspect the changed source set and proceed through the approved review flow.
 - 07/16/26 21:44:44: User corrected that the major Owlbox changes should be recorded as audit/changelog material in the OWL files. This record covers the completed `HOOT.md`, `scripts/hoot-hoot.ps1`, `assistant/`, enabled/assisted terminology, generator, and runtime-sync changes.
+- 07/16/26 23:49:28: Began the generated-LEGACY conversion. The controlled first generator run preserved the former Legacy as a pre-generation record and established comparison state before changing OUTLINE or WISDOM.
+- 07/16/26 23:54:55: Completed the generated-LEGACY conversion. `ORIGINAL.md` now holds the optional project seed; LEGACY is generator-controlled, retains the full pre-generation record, and gains only source-derived OUTLINE and WISDOM change records. All four source skills passed validation, installed runtime copies were synchronized, and the obsolete Legacy template was removed from both source and runtime packages.

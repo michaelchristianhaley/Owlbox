@@ -6,47 +6,49 @@ Owlbox is repository-local project continuity. It preserves enough active state,
 
 ## State Model
 
-`Owlbox` = the three OWL files in `owlbox/`.
+`Owlbox` = `OUTLINE.md` + `WISDOM.md` + generated `LEGACY.md` in `owlbox/`.
 
 `Owlbox-enabled` = Owlbox + generated `HOOT.md` + `scripts/hoot-hoot.ps1`.
 
 `Owlbox-enabled, assisted` = Owlbox-enabled + the four Owlbox skills.
 
-Installed deliverables describe the containing repository. A nested repository may maintain its own Owlbox for its own scope.
+`ORIGINAL.md` is an optional seed file. It is outside all three states.
+
+## Ownership
+
+`OUTLINE.md` and `WISDOM.md` are the editable OWL sources.
+
+`LEGACY.md` is a generated, add-only Log. `hoot-hoot.ps1` records additions, changes, and removals from the two editable sources as unified-diff excerpts with two lines of surrounding context.
+
+`HOOT.md` is the generated combined view of all three OWL files.
+
+Never edit generated files directly.
+
+Existing Legacy content is preserved as a pre-generation record during conversion. New Log entries come only from OUTLINE and WISDOM changes.
 
 ## Operation
 
 1. Read current `HOOT.md`.
-2. Edit the OWL file that owns the information.
-3. Follow that file's permanent header and file-specific skill.
-4. Regenerate `HOOT.md`.
-5. Commit changed OWL files and `HOOT.md` together.
+2. Edit OUTLINE or WISDOM under its permanent header and file-specific skill.
+3. Run `scripts/hoot-hoot.ps1`.
+4. Commit the changed source files and generated files together.
 
-Never make original edits in generated files.
+The generator keeps its comparison state in Git metadata. That state is an internal cache, not an Owlbox file or deliverable.
 
 ## Enable a Repository
 
 1. Create `owlbox/`.
-2. Create the three OWL files from `templates/`.
-3. Replace all template placeholders.
-4. Copy `scripts/hoot-hoot.ps1`.
-5. Generate `HOOT.md`.
-
-The Owlbox skills can create and maintain this implementation, but an Owlbox can exist without assistant skills.
+2. Create `OUTLINE.md` and `WISDOM.md` from `templates/`.
+3. Replace every template placeholder.
+4. Optionally create root `ORIGINAL.md` as the project seed.
+5. Copy `scripts/hoot-hoot.ps1`.
+6. Run it to create `LEGACY.md` and `HOOT.md`.
 
 ## Transfer
 
-Transfer all three OWL files. Between assistant project windows, also transfer a comprehensive summary of chat history and project status.
+Transfer the three OWL files and, between assistant project windows, a comprehensive handoff summary.
 
-Classify transferred information as follows:
-
-- active work: OUTLINE Plan;
-- recent active events: OUTLINE Journal;
-- durable direction: WISDOM Current Plan;
-- durable settings and preferences: WISDOM Preferences;
-- raw handoff and permanent history: LEGACY Log.
-
-OUTLINE and WISDOM remain the working sources. LEGACY Log remains historical cold storage.
+Place active and durable handoff information in OUTLINE and WISDOM. Running `hoot-hoot.ps1` records those source changes in LEGACY. Never place a handoff directly in LEGACY.
 
 For a project-to-project handoff, generate a complete handoff prompt and a project-seed prompt for the next assistant or project-specific `AGENTS.md`.
 
@@ -65,6 +67,6 @@ The distributable skill packages live under `assistant/`. Copy them without para
 
 Validate in proportion to risk:
 
-- ordinary content change: successful generation;
-- structural change: required headings and OWL source order;
-- generator, encoding, or template change: source containment and encoding.
+- ordinary source change: successful generation;
+- generator or migration change: preserved prior Log content and correct diff excerpts;
+- encoding change: source containment and deliberate encoding.

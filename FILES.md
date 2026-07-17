@@ -4,13 +4,17 @@
 
 | Path | Role |
 |---|---|
-| `owlbox/OUTLINE.md` | Active Plan and Journal |
-| `owlbox/WISDOM.md` | Durable Current Plan, Preferences, and Additions |
-| `owlbox/LEGACY.md` | Permanent Log, handoffs, and Original Plan |
-| `HOOT.md` | Generated combined view of the OWL files |
-| `scripts/hoot-hoot.ps1` | Generates `HOOT.md` |
+| `owlbox/OUTLINE.md` | Editable active Plan and Journal |
+| `owlbox/WISDOM.md` | Editable durable Current Plan, Preferences, and Additions |
+| `owlbox/LEGACY.md` | Generated, add-only record of changes to OUTLINE and WISDOM |
+| `HOOT.md` | Generated combined view of the three OWL files |
+| `scripts/hoot-hoot.ps1` | Updates LEGACY and generates HOOT |
 
-The three files under `owlbox/` are the OWL files. Their permanent headers and file-specific skills own their handling rules.
+The three files under `owlbox/` are the OWL files. Only OUTLINE and WISDOM are edited directly.
+
+## Seed File
+
+`ORIGINAL.md` may preserve the original project plan. It is not an OWL file and does not affect Owlbox, Owlbox-enabled, or Owlbox-enabled assisted status.
 
 ## Repository Support Files
 
@@ -22,7 +26,7 @@ The three files under `owlbox/` are the OWL files. Their permanent headers and f
 | `TEMPLATES.md` | Template usage |
 | `BUILDABOX.md` | Repository build |
 | `MANIFEST.md` | Repository inventory |
-| `templates/` | Canonical OWL templates |
+| `templates/` | Canonical templates for editable OWL files |
 | `assistant/` | Distributable Owlbox skills |
 | `scripts/` | Generators |
 | `README.md` | Generated landing page |

@@ -8,6 +8,7 @@ This repository publishes Owlbox, a repository-local continuity system.
 
 - `README.md`: generated landing page.
 - `PROJECT.md`: project charter.
+- `ORIGINAL.md`: optional project seed for this repository.
 - `SOP.md`: procedure and operating specification.
 - `FILES.md`: file descriptions.
 - `DELIVERABLES.md`: Owlbox deliverable files, destinations, enablement, and verification.

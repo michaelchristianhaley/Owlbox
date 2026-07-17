@@ -22,6 +22,12 @@ The supported Owlbox-enabled file set is:
 
 The Owlbox repository also contains supporting documentation, templates, scripts, and assistant skill packages so other repositories and assistants can integrate Owlbox correctly.
 
+--- ORIGINAL.md ---
+
+# ORIGINAL.md
+
+Publish Owlbox as a reusable repository-local continuity system. The deliverable is the Owlbox file set that projects place in their own repositories. The Owlbox repository should also provide documentation, templates, scripts, and a Codex skill so humans and assistants can integrate Owlbox correctly.
+
 --- SOP.md ---
 
 # SOP.md
@@ -32,47 +38,49 @@ Owlbox is repository-local project continuity. It preserves enough active state,
 
 ## State Model
 
-`Owlbox` = the three OWL files in `owlbox/`.
+`Owlbox` = `OUTLINE.md` + `WISDOM.md` + generated `LEGACY.md` in `owlbox/`.
 
 `Owlbox-enabled` = Owlbox + generated `HOOT.md` + `scripts/hoot-hoot.ps1`.
 
 `Owlbox-enabled, assisted` = Owlbox-enabled + the four Owlbox skills.
 
-Installed deliverables describe the containing repository. A nested repository may maintain its own Owlbox for its own scope.
+`ORIGINAL.md` is an optional seed file. It is outside all three states.
+
+## Ownership
+
+`OUTLINE.md` and `WISDOM.md` are the editable OWL sources.
+
+`LEGACY.md` is a generated, add-only Log. `hoot-hoot.ps1` records additions, changes, and removals from the two editable sources as unified-diff excerpts with two lines of surrounding context.
+
+`HOOT.md` is the generated combined view of all three OWL files.
+
+Never edit generated files directly.
+
+Existing Legacy content is preserved as a pre-generation record during conversion. New Log entries come only from OUTLINE and WISDOM changes.
 
 ## Operation
 
 1. Read current `HOOT.md`.
-2. Edit the OWL file that owns the information.
-3. Follow that file's permanent header and file-specific skill.
-4. Regenerate `HOOT.md`.
-5. Commit changed OWL files and `HOOT.md` together.
+2. Edit OUTLINE or WISDOM under its permanent header and file-specific skill.
+3. Run `scripts/hoot-hoot.ps1`.
+4. Commit the changed source files and generated files together.
 
-Never make original edits in generated files.
+The generator keeps its comparison state in Git metadata. That state is an internal cache, not an Owlbox file or deliverable.
 
 ## Enable a Repository
 
 1. Create `owlbox/`.
-2. Create the three OWL files from `templates/`.
-3. Replace all template placeholders.
-4. Copy `scripts/hoot-hoot.ps1`.
-5. Generate `HOOT.md`.
-
-The Owlbox skills can create and maintain this implementation, but an Owlbox can exist without assistant skills.
+2. Create `OUTLINE.md` and `WISDOM.md` from `templates/`.
+3. Replace every template placeholder.
+4. Optionally create root `ORIGINAL.md` as the project seed.
+5. Copy `scripts/hoot-hoot.ps1`.
+6. Run it to create `LEGACY.md` and `HOOT.md`.
 
 ## Transfer
 
-Transfer all three OWL files. Between assistant project windows, also transfer a comprehensive summary of chat history and project status.
+Transfer the three OWL files and, between assistant project windows, a comprehensive handoff summary.
 
-Classify transferred information as follows:
-
-- active work: OUTLINE Plan;
-- recent active events: OUTLINE Journal;
-- durable direction: WISDOM Current Plan;
-- durable settings and preferences: WISDOM Preferences;
-- raw handoff and permanent history: LEGACY Log.
-
-OUTLINE and WISDOM remain the working sources. LEGACY Log remains historical cold storage.
+Place active and durable handoff information in OUTLINE and WISDOM. Running `hoot-hoot.ps1` records those source changes in LEGACY. Never place a handoff directly in LEGACY.
 
 For a project-to-project handoff, generate a complete handoff prompt and a project-seed prompt for the next assistant or project-specific `AGENTS.md`.
 
@@ -91,9 +99,9 @@ The distributable skill packages live under `assistant/`. Copy them without para
 
 Validate in proportion to risk:
 
-- ordinary content change: successful generation;
-- structural change: required headings and OWL source order;
-- generator, encoding, or template change: source containment and encoding.
+- ordinary source change: successful generation;
+- generator or migration change: preserved prior Log content and correct diff excerpts;
+- encoding change: source containment and deliberate encoding.
 
 --- FILES.md ---
 
@@ -103,13 +111,17 @@ Validate in proportion to risk:
 
 | Path | Role |
 |---|---|
-| `owlbox/OUTLINE.md` | Active Plan and Journal |
-| `owlbox/WISDOM.md` | Durable Current Plan, Preferences, and Additions |
-| `owlbox/LEGACY.md` | Permanent Log, handoffs, and Original Plan |
-| `HOOT.md` | Generated combined view of the OWL files |
-| `scripts/hoot-hoot.ps1` | Generates `HOOT.md` |
+| `owlbox/OUTLINE.md` | Editable active Plan and Journal |
+| `owlbox/WISDOM.md` | Editable durable Current Plan, Preferences, and Additions |
+| `owlbox/LEGACY.md` | Generated, add-only record of changes to OUTLINE and WISDOM |
+| `HOOT.md` | Generated combined view of the three OWL files |
+| `scripts/hoot-hoot.ps1` | Updates LEGACY and generates HOOT |
 
-The three files under `owlbox/` are the OWL files. Their permanent headers and file-specific skills own their handling rules.
+The three files under `owlbox/` are the OWL files. Only OUTLINE and WISDOM are edited directly.
+
+## Seed File
+
+`ORIGINAL.md` may preserve the original project plan. It is not an OWL file and does not affect Owlbox, Owlbox-enabled, or Owlbox-enabled assisted status.
 
 ## Repository Support Files
 
@@ -121,7 +133,7 @@ The three files under `owlbox/` are the OWL files. Their permanent headers and f
 | `TEMPLATES.md` | Template usage |
 | `BUILDABOX.md` | Repository build |
 | `MANIFEST.md` | Repository inventory |
-| `templates/` | Canonical OWL templates |
+| `templates/` | Canonical templates for editable OWL files |
 | `assistant/` | Distributable Owlbox skills |
 | `scripts/` | Generators |
 | `README.md` | Generated landing page |
@@ -146,7 +158,9 @@ This file defines Owlbox deliverable states, destinations, and acceptance.
 
 `Owlbox-enabled, assisted` = Owlbox-enabled + the four Owlbox skills.
 
-The Owlbox skills can create and maintain an Owlbox, but they are not required for an Owlbox to exist.
+`OUTLINE.md` and `WISDOM.md` are editable sources. `LEGACY.md` is generated from their changes.
+
+`ORIGINAL.md` is an optional seed file. It is not an OWL file, an enablement requirement, or an assisted-use requirement.
 
 ## Owlbox-Enabled Deliverables
 
@@ -155,8 +169,6 @@ The Owlbox skills can create and maintain an Owlbox, but they are not required f
 - `owlbox/LEGACY.md`
 - `HOOT.md`
 - `scripts/hoot-hoot.ps1`
-
-The three files under `owlbox/` are the OWL files. `HOOT.md` is generated from them and is not itself an OWL file.
 
 ## Assisted Deliverables
 
@@ -167,13 +179,11 @@ The three files under `owlbox/` are the OWL files. `HOOT.md` is generated from t
 
 ## Destinations
 
-Place OWL files in `owlbox/`, `HOOT.md` in the project root, and `hoot-hoot.ps1` in `scripts/`.
+Create `OUTLINE.md` and `WISDOM.md` in `owlbox/`. Place `hoot-hoot.ps1` in `scripts/` and run it from the project root. The script creates `LEGACY.md` and `HOOT.md`.
 
-Use the files in `templates/` when creating a fresh Owlbox.
+Use the files in `templates/` when creating the two editable OWL sources.
 
 Installed deliverables describe the containing project. A cloned or embedded repository may maintain its own Owlbox for its own repository scope.
-
-After changing an OWL file, run `scripts/hoot-hoot.ps1` from the project root.
 
 ## Acceptance
 
@@ -181,17 +191,13 @@ A project is Owlbox-enabled when all five Owlbox-enabled deliverables exist and 
 
 It is Owlbox-enabled, assisted when the four Owlbox skills are also available to the assistant.
 
-## Growth
-
-The deliverables are provided directly so Owlbox and adopting projects can evolve.
-
 --- TEMPLATES.md ---
 
 # TEMPLATES.md
 
 ## Purpose
 
-The files in `templates/` are the canonical structures for creating or repairing OWL files.
+The files in `templates/` are the canonical structures for creating or repairing the two editable OWL files.
 
 ## Rules
 
@@ -207,9 +213,8 @@ The files in `templates/` are the canonical structures for creating or repairing
 |---|---|---|
 | `templates/OUTLINE.template.md` | `owlbox/OUTLINE.md` | Plan, Journal |
 | `templates/WISDOM.template.md` | `owlbox/WISDOM.md` | Current Plan, Preferences, Additions |
-| `templates/LEGACY.template.md` | `owlbox/LEGACY.md` | Log, Handoff Files, Original Plan |
 
-The templates themselves define the required file text. This document does not duplicate them.
+`LEGACY.md` has no template because `scripts/hoot-hoot.ps1` generates it.
 
 --- BUILDABOX.md ---
 
@@ -219,9 +224,10 @@ The templates themselves define the required file text. This document does not d
 
 | Output | Source |
 |---|---|
+| `owlbox/LEGACY.md` | Changes to OUTLINE and WISDOM |
 | `HOOT.md` | The three OWL files |
 | `README.md` | `PROJECT.md` plus repository navigation |
-| `VISION.md` | The publication and skill source files listed in `build-vision.ps1` |
+| `VISION.md` | The publication and skill sources listed in `build-vision.ps1` |
 
 ## Build
 
@@ -229,7 +235,11 @@ The templates themselves define the required file text. This document does not d
 powershell -ExecutionPolicy Bypass -File scripts\build-all.ps1
 ```
 
-`build-all.ps1` runs the three generators and stops on failure.
+`build-all.ps1` updates LEGACY, then regenerates HOOT, README, and VISION.
+
+The Legacy generator records source changes as contextual unified diffs. Its previous-source cache lives in Git metadata as `owlbox-legacy-state.json`; it is not a deliverable.
+
+On conversion from the earlier Legacy format, the generator preserves the entire existing file as a pre-generation record. Future runs only add generated source-change entries.
 
 Edit source files first. Commit source and generated files together.
 
@@ -283,36 +293,11 @@ FIXME replace with durable project preferences, settings values, connection sett
 --- Newest Addition ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
---- templates/LEGACY.template.md ---
-
-Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
-Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
-originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
-
----- ^ PERMANENT HEADER DO NOT EDIT ^ ----
-
-# LEGACY.md
-
-## Log
-
---- Newest OWL Event ---
-### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
-
-Legacy Log is historical provenance and disaster recovery material: the sacrosanct heart of the program, but not an ordinary source of truth for current plan, state, or preferences. Log may be written to at will. Log shall never have its values changed or deleted. Use Log to reconstruct state only when the rest of the Owlbox system has failed or been lost. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
-
-### Handoff Files
-
-Entire handoff files may be preserved here when full context transfer matters. After adding a handoff file, evaluate it and place relevant active information in OUTLINE.md Plan, OUTLINE.md Journal, WISDOM.md Current Plan, and WISDOM.md Preferences as needed.
-
-## Original Plan
-
-FIXME replace with paragraph(s) detailing the original plan from beginning to end.
-
 --- assistant/owlbox/SKILL.md ---
 
 ---
 name: owlbox
-description: Maintain Owlbox project continuity. Use when a project contains HOOT.md, owlbox/OUTLINE.md, owlbox/WISDOM.md, or owlbox/LEGACY.md, or when the user asks to create, read, update, reconcile, or repair OUTLINE.md, WISDOM.md, or LEGACY.md. Every long-lived Git repository should contain an Owlbox. Owlbox is part of the repository, not external documentation. If no Owlbox yet exists for a project, create it in the git root.
+description: Maintain Owlbox project continuity. Use when a project contains HOOT.md or any OWL file, or when the user asks to create, read, update, transfer, reconcile, or repair Owlbox. Treat OUTLINE.md and WISDOM.md as editable sources and LEGACY.md and HOOT.md as generated files.
 ---
 
 # Owlbox
@@ -323,32 +308,31 @@ Owlbox provides repository-local project continuity.
 
 ## State Model
 
-`Owlbox` = `owlbox/OUTLINE.md` + `owlbox/WISDOM.md` + `owlbox/LEGACY.md`.
+`Owlbox` = `owlbox/OUTLINE.md` + `owlbox/WISDOM.md` + generated `owlbox/LEGACY.md`.
 
 `Owlbox-enabled` = Owlbox + generated `HOOT.md` + `scripts/hoot-hoot.ps1`.
 
 `Owlbox-enabled, assisted` = Owlbox-enabled + `owlbox`, `owlbox-outline`, `owlbox-wisdom`, and `owlbox-legacy`.
 
+`ORIGINAL.md` is an optional seed file outside all three states.
+
 ## Procedure
 
-1. Discover the repository's Owlbox.
-2. Read `HOOT.md` when it is current.
-3. Edit the OWL file that owns the information.
-4. Apply that file's specific Owlbox skill.
-5. Regenerate `HOOT.md` after OWL-file changes.
-6. Validate in proportion to the change's risk.
-
-Never make original edits in `HOOT.md`.
+1. Read `HOOT.md` when it is current.
+2. Edit OUTLINE or WISDOM under its file-specific skill.
+3. Run `scripts/hoot-hoot.ps1` after every accepted source change.
+4. Let the script add contextual source diffs to LEGACY and regenerate HOOT.
+5. Never edit LEGACY or HOOT directly.
 
 ## File Ownership
 
 | File | Skill | Role |
 |---|---|---|
-| `OUTLINE.md` | `owlbox-outline` | Active Plan and Journal |
-| `WISDOM.md` | `owlbox-wisdom` | Durable Current Plan, Preferences, and Additions |
-| `LEGACY.md` | `owlbox-legacy` | Permanent Log, handoffs, and Original Plan |
+| `OUTLINE.md` | `owlbox-outline` | Editable active Plan and Journal |
+| `WISDOM.md` | `owlbox-wisdom` | Editable durable Current Plan, Preferences, and Additions |
+| `LEGACY.md` | `owlbox-legacy` | Generated, add-only record of source changes |
 
-Before creating or repairing an OWL file, use its matching template from `assets/`.
+Use the matching asset template when creating or repairing OUTLINE or WISDOM. The generator creates LEGACY.
 
 --- assistant/owlbox-outline/SKILL.md ---
 
@@ -377,6 +361,8 @@ Journal items may be written at will. Journal items may never have their values 
 Plan is current work state. Journal is recent active context, not permanent project history.
 
 Read the permanent header before editing. Do not perform an edit that conflicts with it; explain the conflict.
+
+After an accepted write, run `scripts/hoot-hoot.ps1` to record the change in LEGACY and regenerate HOOT.
 
 --- assistant/owlbox-wisdom/SKILL.md ---
 
@@ -409,38 +395,24 @@ Record every accepted Preference addition or value change in Additions.
 
 Read the permanent header before editing. Do not perform an edit that conflicts with it; explain the conflict.
 
+After an accepted write, run `scripts/hoot-hoot.ps1` to record the change in LEGACY and regenerate HOOT.
+
 --- assistant/owlbox-legacy/SKILL.md ---
 
 ---
 name: owlbox-legacy
-description: Handle Owlbox LEGACY.md files. Use when reading, creating, editing, repairing, or reconciling owlbox/LEGACY.md, LEGACY.template.md, Log, Handoffs, originalPlan, or the LEGACY section of generated HOOT.md. Enforces Log, Handoffs, and originalPlan handling rules from the permanent LEGACY header so historical values are not changed or deleted.
+description: Protect generated Owlbox LEGACY.md files. Use when reading, generating, migrating, repairing, or being asked to edit owlbox/LEGACY.md, Log, or the LEGACY section of HOOT.md. Redirect all source changes to OUTLINE.md or WISDOM.md and let scripts/hoot-hoot.ps1 update LEGACY.
 ---
 
 # Owlbox LEGACY
 
-Use this skill for `owlbox/LEGACY.md` and `LEGACY.template.md`.
+`LEGACY.md` is generated by `scripts/hoot-hoot.ps1`. Never edit it directly.
 
-## Permanent Header
+Existing Log entries are immutable. The generator may only add entries derived from changes to OUTLINE or WISDOM.
 
-The file must begin with this permanent header. Copy it exactly when creating or repairing the file.
+When a requested Legacy change represents active state, edit OUTLINE. When it represents durable state or preference, edit WISDOM. Run `scripts/hoot-hoot.ps1`; it records the source diff in LEGACY with surrounding context.
 
-```text
-Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
-Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
-originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
-
----- ^ PERMANENT HEADER DO NOT EDIT ^ ----
-```
-
-## Handling
-
-Log is historical provenance and disaster-recovery material, not ordinary current state.
-
-Retain each handoff as one Log entry, then evaluate it for active or durable information belonging in OUTLINE or WISDOM.
-
-Recover missing history through a new reconstruction entry that identifies its source.
-
-Read the permanent header before editing. Do not change or delete existing Log or Original Plan values. Record corrections as new Log entries when appropriate.
+During conversion from the earlier Legacy format, preserve the existing file as one pre-generation record. Do not revise or remove that preserved material.
 
 --- assistant/owlbox/assets/OUTLINE.template.md ---
 
@@ -486,92 +458,417 @@ FIXME replace with durable project preferences, settings values, connection sett
 --- Newest Addition ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
---- assistant/owlbox/assets/LEGACY.template.md ---
-
-Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
-Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
-originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
-
----- ^ PERMANENT HEADER DO NOT EDIT ^ ----
-
-# LEGACY.md
-
-## Log
-
---- Newest OWL Event ---
-### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
-
-Legacy Log is historical provenance and disaster recovery material: the sacrosanct heart of the program, but not an ordinary source of truth for current plan, state, or preferences. Log may be written to at will. Log shall never have its values changed or deleted. Use Log to reconstruct state only when the rest of the Owlbox system has failed or been lost. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
-
-### Handoff Files
-
-Entire handoff files may be preserved here when full context transfer matters. After adding a handoff file, evaluate it and place relevant active information in OUTLINE.md Plan, OUTLINE.md Journal, WISDOM.md Current Plan, and WISDOM.md Preferences as needed.
-
-## Original Plan
-
-FIXME replace with paragraph(s) detailing the original plan from beginning to end.
-
 --- assistant/owlbox/scripts/hoot-hoot.ps1 ---
 
 $ErrorActionPreference = "Stop"
 
-$root = (Get-Location).Path
-$sources = @(
+if (Test-Path Variable:PSNativeCommandUseErrorActionPreference) {
+  $PSNativeCommandUseErrorActionPreference = $false
+}
+
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+$rootCandidate = Split-Path -Parent $PSScriptRoot
+$root = if (Test-Path -LiteralPath (Join-Path $rootCandidate "owlbox/OUTLINE.md")) { $rootCandidate } else { (Get-Location).Path }
+
+$sourcePaths = @(
   "owlbox/OUTLINE.md",
-  "owlbox/WISDOM.md",
-  "owlbox/LEGACY.md"
+  "owlbox/WISDOM.md"
 )
 
-$content = @(
+$legacyPath = Join-Path $root "owlbox/LEGACY.md"
+$hootPath = Join-Path $root "HOOT.md"
+$originalPath = Join-Path $root "ORIGINAL.md"
+
+$legacyHeader = @(
+  "LEGACY.md is generated by scripts/hoot-hoot.ps1. Never edit this file directly.",
+  "New Log entries come only from changes to OUTLINE.md and WISDOM.md. Existing Log entries shall never be changed or deleted.",
+  "",
+  "---- ^ PERMANENT HEADER DO NOT EDIT ^ ----",
+  "",
+  "# LEGACY.md",
+  "",
+  "## Log",
+  ""
+) -join "`n"
+
+function Normalize-Text {
+  param([AllowEmptyString()][string]$Text)
+
+  if ($null -eq $Text) { $Text = "" }
+  $normalized = $Text -replace "`r`n", "`n" -replace "`r", "`n"
+  if ($normalized.Length -eq 0) { return "" }
+  return $normalized.TrimEnd([char[]]"`n") + "`n"
+}
+
+function Write-Utf8 {
+  param([string]$Path, [string]$Text)
+  [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
+}
+
+function Get-Sha256 {
+  param([string]$Text)
+
+  $sha = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+    return (($sha.ComputeHash($bytes) | ForEach-Object { "{0:x2}" -f $_ }) -join "")
+  } finally {
+    $sha.Dispose()
+  }
+}
+
+function Get-ContextDiff {
+  param([string]$Before, [string]$After)
+
+  $beforePath = [System.IO.Path]::GetTempFileName()
+  $afterPath = [System.IO.Path]::GetTempFileName()
+
+  try {
+    Write-Utf8 $beforePath $Before
+    Write-Utf8 $afterPath $After
+
+    $output = @(& git diff --no-index --unified=2 --text -- $beforePath $afterPath 2>&1)
+    $exitCode = $LASTEXITCODE
+
+    if ($exitCode -gt 1) {
+      throw "git diff failed: $($output -join "`n")"
+    }
+
+    $body = foreach ($line in $output) {
+      $text = $line.ToString()
+      if ($text -notmatch '^diff --git ' -and
+          $text -notmatch '^index ' -and
+          $text -notmatch '^--- ' -and
+          $text -notmatch '^\+\+\+ ' -and
+          $text -notmatch '^warning: ') {
+        if ($text -eq " ") { "" } else { $text }
+      }
+    }
+
+    return ($body -join "`n")
+  } finally {
+    Remove-Item -LiteralPath $beforePath, $afterPath -Force -ErrorAction SilentlyContinue
+  }
+}
+
+$gitStatePathOutput = @(& git -C $root rev-parse --git-path owlbox-legacy-state.json 2>&1)
+if ($LASTEXITCODE -ne 0) {
+  throw "Owlbox requires a Git repository: $($gitStatePathOutput -join "`n")"
+}
+
+$gitStatePathText = $gitStatePathOutput[0].ToString().Trim()
+$statePath = if ([System.IO.Path]::IsPathRooted($gitStatePathText)) { $gitStatePathText } else { Join-Path $root $gitStatePathText }
+
+$current = @{}
+foreach ($source in $sourcePaths) {
+  $path = Join-Path $root $source
+  if (-not (Test-Path -LiteralPath $path)) {
+    throw "Missing Owlbox source: $source"
+  }
+  $current[$source] = Normalize-Text (Get-Content -LiteralPath $path -Raw -Encoding utf8)
+}
+
+$legacyExisted = Test-Path -LiteralPath $legacyPath
+$stateExisted = Test-Path -LiteralPath $statePath
+$legacyChanged = $false
+
+if ($legacyExisted) {
+  $legacy = Get-Content -LiteralPath $legacyPath -Raw -Encoding utf8
+  if (-not $legacy.StartsWith("LEGACY.md is generated by scripts/hoot-hoot.ps1.")) {
+    if (-not (Test-Path -LiteralPath $originalPath)) {
+      throw "Create ORIGINAL.md before converting the earlier LEGACY.md format."
+    }
+    $preserved = $legacy.TrimEnd([char[]]"`r`n")
+    $legacy = $legacyHeader + "### Pre-generation Legacy`n`n" + '````text' + "`n" + $preserved + "`n" + '````' + "`n"
+    $legacyChanged = $true
+  } else {
+    $legacy = Normalize-Text $legacy
+  }
+} else {
+  $legacy = $legacyHeader
+  $legacyChanged = $true
+}
+
+$previous = @{}
+if ($stateExisted) {
+  $state = Get-Content -LiteralPath $statePath -Raw -Encoding utf8 | ConvertFrom-Json
+  $previous["owlbox/OUTLINE.md"] = [string]$state.outline
+  $previous["owlbox/WISDOM.md"] = [string]$state.wisdom
+} elseif ($legacyExisted) {
+  foreach ($source in $sourcePaths) {
+    $previous[$source] = $current[$source]
+  }
+} else {
+  foreach ($source in $sourcePaths) {
+    $previous[$source] = ""
+  }
+}
+
+foreach ($source in $sourcePaths) {
+  $before = Normalize-Text $previous[$source]
+  $after = $current[$source]
+
+  if ($before -eq $after) { continue }
+
+  $hash = Get-Sha256 $after
+  $revision = "Revision: sha256:$hash"
+  if ($legacy.Contains($revision)) { continue }
+
+  $diff = Get-ContextDiff $before $after
+  if ([string]::IsNullOrWhiteSpace($diff)) { continue }
+
+  $timestamp = Get-Date -Format "MM/dd/yy HH:mm:ss"
+  $name = Split-Path -Leaf $source
+  $entry = @(
+    "",
+    "### $timestamp - $name change",
+    "",
+    $revision,
+    "",
+    '```diff',
+    $diff,
+    '```',
+    ""
+  ) -join "`n"
+
+  $legacy = $legacy.TrimEnd([char[]]"`n") + $entry
+  $legacyChanged = $true
+}
+
+if ($legacyChanged) {
+  Write-Utf8 $legacyPath (Normalize-Text $legacy)
+}
+
+$state = [ordered]@{
+  version = 1
+  outline = $current["owlbox/OUTLINE.md"]
+  wisdom = $current["owlbox/WISDOM.md"]
+}
+Write-Utf8 $statePath ((ConvertTo-Json $state -Depth 3) + "`n")
+
+$hootContent = @(
   "# HOOT.md",
   "",
   "Generated from canonical OWL files. Do not edit this file directly.",
   ""
 )
 
-foreach ($source in $sources) {
+foreach ($source in @("owlbox/OUTLINE.md", "owlbox/WISDOM.md", "owlbox/LEGACY.md")) {
   $path = Join-Path $root $source
   if (-not (Test-Path -LiteralPath $path)) {
-    throw "Missing Owlbox source: $source"
+    throw "Missing Owlbox file: $source"
   }
-  $content += Get-Content $path -Encoding utf8
-  $content += ""
+  $hootContent += Get-Content -LiteralPath $path -Encoding utf8
+  $hootContent += ""
 }
 
-$output = Join-Path $root "HOOT.md"
-$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
-[System.IO.File]::WriteAllText($output, (($content -join "`n") + "`n"), $utf8NoBom)
+Write-Utf8 $hootPath (($hootContent -join "`n") + "`n")
 
 --- scripts/hoot-hoot.ps1 ---
 
 $ErrorActionPreference = "Stop"
 
-$root = Split-Path -Parent $PSScriptRoot
-$sources = @(
+if (Test-Path Variable:PSNativeCommandUseErrorActionPreference) {
+  $PSNativeCommandUseErrorActionPreference = $false
+}
+
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+$rootCandidate = Split-Path -Parent $PSScriptRoot
+$root = if (Test-Path -LiteralPath (Join-Path $rootCandidate "owlbox/OUTLINE.md")) { $rootCandidate } else { (Get-Location).Path }
+
+$sourcePaths = @(
   "owlbox/OUTLINE.md",
-  "owlbox/WISDOM.md",
-  "owlbox/LEGACY.md"
+  "owlbox/WISDOM.md"
 )
 
-$content = @(
+$legacyPath = Join-Path $root "owlbox/LEGACY.md"
+$hootPath = Join-Path $root "HOOT.md"
+$originalPath = Join-Path $root "ORIGINAL.md"
+
+$legacyHeader = @(
+  "LEGACY.md is generated by scripts/hoot-hoot.ps1. Never edit this file directly.",
+  "New Log entries come only from changes to OUTLINE.md and WISDOM.md. Existing Log entries shall never be changed or deleted.",
+  "",
+  "---- ^ PERMANENT HEADER DO NOT EDIT ^ ----",
+  "",
+  "# LEGACY.md",
+  "",
+  "## Log",
+  ""
+) -join "`n"
+
+function Normalize-Text {
+  param([AllowEmptyString()][string]$Text)
+
+  if ($null -eq $Text) { $Text = "" }
+  $normalized = $Text -replace "`r`n", "`n" -replace "`r", "`n"
+  if ($normalized.Length -eq 0) { return "" }
+  return $normalized.TrimEnd([char[]]"`n") + "`n"
+}
+
+function Write-Utf8 {
+  param([string]$Path, [string]$Text)
+  [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
+}
+
+function Get-Sha256 {
+  param([string]$Text)
+
+  $sha = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+    return (($sha.ComputeHash($bytes) | ForEach-Object { "{0:x2}" -f $_ }) -join "")
+  } finally {
+    $sha.Dispose()
+  }
+}
+
+function Get-ContextDiff {
+  param([string]$Before, [string]$After)
+
+  $beforePath = [System.IO.Path]::GetTempFileName()
+  $afterPath = [System.IO.Path]::GetTempFileName()
+
+  try {
+    Write-Utf8 $beforePath $Before
+    Write-Utf8 $afterPath $After
+
+    $output = @(& git diff --no-index --unified=2 --text -- $beforePath $afterPath 2>&1)
+    $exitCode = $LASTEXITCODE
+
+    if ($exitCode -gt 1) {
+      throw "git diff failed: $($output -join "`n")"
+    }
+
+    $body = foreach ($line in $output) {
+      $text = $line.ToString()
+      if ($text -notmatch '^diff --git ' -and
+          $text -notmatch '^index ' -and
+          $text -notmatch '^--- ' -and
+          $text -notmatch '^\+\+\+ ' -and
+          $text -notmatch '^warning: ') {
+        if ($text -eq " ") { "" } else { $text }
+      }
+    }
+
+    return ($body -join "`n")
+  } finally {
+    Remove-Item -LiteralPath $beforePath, $afterPath -Force -ErrorAction SilentlyContinue
+  }
+}
+
+$gitStatePathOutput = @(& git -C $root rev-parse --git-path owlbox-legacy-state.json 2>&1)
+if ($LASTEXITCODE -ne 0) {
+  throw "Owlbox requires a Git repository: $($gitStatePathOutput -join "`n")"
+}
+
+$gitStatePathText = $gitStatePathOutput[0].ToString().Trim()
+$statePath = if ([System.IO.Path]::IsPathRooted($gitStatePathText)) { $gitStatePathText } else { Join-Path $root $gitStatePathText }
+
+$current = @{}
+foreach ($source in $sourcePaths) {
+  $path = Join-Path $root $source
+  if (-not (Test-Path -LiteralPath $path)) {
+    throw "Missing Owlbox source: $source"
+  }
+  $current[$source] = Normalize-Text (Get-Content -LiteralPath $path -Raw -Encoding utf8)
+}
+
+$legacyExisted = Test-Path -LiteralPath $legacyPath
+$stateExisted = Test-Path -LiteralPath $statePath
+$legacyChanged = $false
+
+if ($legacyExisted) {
+  $legacy = Get-Content -LiteralPath $legacyPath -Raw -Encoding utf8
+  if (-not $legacy.StartsWith("LEGACY.md is generated by scripts/hoot-hoot.ps1.")) {
+    if (-not (Test-Path -LiteralPath $originalPath)) {
+      throw "Create ORIGINAL.md before converting the earlier LEGACY.md format."
+    }
+    $preserved = $legacy.TrimEnd([char[]]"`r`n")
+    $legacy = $legacyHeader + "### Pre-generation Legacy`n`n" + '````text' + "`n" + $preserved + "`n" + '````' + "`n"
+    $legacyChanged = $true
+  } else {
+    $legacy = Normalize-Text $legacy
+  }
+} else {
+  $legacy = $legacyHeader
+  $legacyChanged = $true
+}
+
+$previous = @{}
+if ($stateExisted) {
+  $state = Get-Content -LiteralPath $statePath -Raw -Encoding utf8 | ConvertFrom-Json
+  $previous["owlbox/OUTLINE.md"] = [string]$state.outline
+  $previous["owlbox/WISDOM.md"] = [string]$state.wisdom
+} elseif ($legacyExisted) {
+  foreach ($source in $sourcePaths) {
+    $previous[$source] = $current[$source]
+  }
+} else {
+  foreach ($source in $sourcePaths) {
+    $previous[$source] = ""
+  }
+}
+
+foreach ($source in $sourcePaths) {
+  $before = Normalize-Text $previous[$source]
+  $after = $current[$source]
+
+  if ($before -eq $after) { continue }
+
+  $hash = Get-Sha256 $after
+  $revision = "Revision: sha256:$hash"
+  if ($legacy.Contains($revision)) { continue }
+
+  $diff = Get-ContextDiff $before $after
+  if ([string]::IsNullOrWhiteSpace($diff)) { continue }
+
+  $timestamp = Get-Date -Format "MM/dd/yy HH:mm:ss"
+  $name = Split-Path -Leaf $source
+  $entry = @(
+    "",
+    "### $timestamp - $name change",
+    "",
+    $revision,
+    "",
+    '```diff',
+    $diff,
+    '```',
+    ""
+  ) -join "`n"
+
+  $legacy = $legacy.TrimEnd([char[]]"`n") + $entry
+  $legacyChanged = $true
+}
+
+if ($legacyChanged) {
+  Write-Utf8 $legacyPath (Normalize-Text $legacy)
+}
+
+$state = [ordered]@{
+  version = 1
+  outline = $current["owlbox/OUTLINE.md"]
+  wisdom = $current["owlbox/WISDOM.md"]
+}
+Write-Utf8 $statePath ((ConvertTo-Json $state -Depth 3) + "`n")
+
+$hootContent = @(
   "# HOOT.md",
   "",
   "Generated from canonical OWL files. Do not edit this file directly.",
   ""
 )
 
-foreach ($source in $sources) {
+foreach ($source in @("owlbox/OUTLINE.md", "owlbox/WISDOM.md", "owlbox/LEGACY.md")) {
   $path = Join-Path $root $source
   if (-not (Test-Path -LiteralPath $path)) {
-    throw "Missing Owlbox source: $source"
+    throw "Missing Owlbox file: $source"
   }
-  $content += Get-Content $path -Encoding utf8
-  $content += ""
+  $hootContent += Get-Content -LiteralPath $path -Encoding utf8
+  $hootContent += ""
 }
 
-$output = Join-Path $root "HOOT.md"
-$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
-[System.IO.File]::WriteAllText($output, (($content -join "`n") + "`n"), $utf8NoBom)
+Write-Utf8 $hootPath (($hootContent -join "`n") + "`n")
 
 --- scripts/build-readme.ps1 ---
 
@@ -633,6 +930,7 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $sources = @(
   "PROJECT.md",
+  "ORIGINAL.md",
   "SOP.md",
   "FILES.md",
   "DELIVERABLES.md",
@@ -640,14 +938,12 @@ $sources = @(
   "BUILDABOX.md",
   "templates/OUTLINE.template.md",
   "templates/WISDOM.template.md",
-  "templates/LEGACY.template.md",
   "assistant/owlbox/SKILL.md",
   "assistant/owlbox-outline/SKILL.md",
   "assistant/owlbox-wisdom/SKILL.md",
   "assistant/owlbox-legacy/SKILL.md",
   "assistant/owlbox/assets/OUTLINE.template.md",
   "assistant/owlbox/assets/WISDOM.template.md",
-  "assistant/owlbox/assets/LEGACY.template.md",
   "assistant/owlbox/scripts/hoot-hoot.ps1",
   "scripts/hoot-hoot.ps1",
   "scripts/build-readme.ps1",
