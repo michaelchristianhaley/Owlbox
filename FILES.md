@@ -55,6 +55,8 @@ Permanent project history.
 
 `LEGACY.md` explains how the project became what it is.
 
+`LEGACY.md` Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
+
 After adding a handoff file to `LEGACY.md`, evaluate it and place relevant active or durable information in `OUTLINE.md` Plan, `OUTLINE.md` Journal, `WISDOM.md` Current Plan, and `WISDOM.md` Preferences as needed. If the handoff does not affect those sections now, preserve it only in `LEGACY.md`.
 
 ## Owlbox Repository Support Files
@@ -101,9 +103,21 @@ Executable helper scripts for generating repository artifacts.
 
 ### `codex/owlbox/`
 
-Codex skill implementation of Owlbox.
+Main Codex skill implementation of Owlbox.
 
-This is how Owlbox is packaged for Codex as an operational skill.
+This is the repository-level Owlbox continuity skill.
 
-The Owlbox repository specification must be capable of reproducing this skill exactly.
+### `codex/owlbox-outline/`
+
+Codex skill for handling `OUTLINE.md` according to its permanent header.
+
+### `codex/owlbox-wisdom/`
+
+Codex skill for handling `WISDOM.md` according to its permanent header.
+
+### `codex/owlbox-legacy/`
+
+Codex skill for handling `LEGACY.md` according to its permanent header.
+
+The Owlbox repository specification must be capable of reproducing these skills exactly.
 

@@ -61,6 +61,12 @@ Before creating or restructuring an Owlbox source file, read its matching templa
 
 Preserve the headings, section order, chronology direction, and human-readable formatting defined by that template.
 
+Use the file-specific Owlbox skill for the canonical file being changed:
+
+- `owlbox-outline` for `OUTLINE.md`
+- `owlbox-wisdom` for `WISDOM.md`
+- `owlbox-legacy` for `LEGACY.md`
+
 # Owlbox Files
 
 ## OWLBOX.md
@@ -103,7 +109,7 @@ The assistant is responsible for logging changes to Additions and for keeping Cu
 
 Legacy is the permanent history of the project. It contains two sections:
 
-### Log records significant requests, decisions, actions, milestones, failures, recoveries, and other events that explain how the project reached its current state. Legacy explains how the project became what it is. Entries are chronological with date then time in the MM/DD/YY hh:mm:ss format and are intended to remain permanently.
+### Log records significant requests, decisions, actions, milestones, failures, recoveries, and other events that explain how the project reached its current state. Legacy explains how the project became what it is. Entries are chronological with date then time in the MM/DD/YY hh:mm:ss format. Log may be written to at will. Log values shall never be changed or deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
 
 Legacy may also preserve entire handoff files when full context transfer matters. After adding a handoff file to Legacy, evaluate the handoff and place relevant active information in OUTLINE.md Plan, OUTLINE.md Journal, WISDOM.md Current Plan, and WISDOM.md Preferences as needed.
 

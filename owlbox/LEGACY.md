@@ -1,3 +1,9 @@
+Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
+Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
+originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+
 # LEGACY.md
 
 ## Log
@@ -13,6 +19,7 @@
 - 07/16/26 13:55:00: The user clarified that the Owlbox repository's own Owlbox should describe the history, working memory, preferences, and plan of the Owlbox tool project. The active Owlbox Plan and Wisdom were corrected to state that directly.
 - 07/16/26 14:05:00: The user clarified that the Owlbox repository's own Owlbox exists for project continuity when maintaining the Owlbox tool project.
 - 07/16/26 14:50:00: Owlbox added `DELIVERABLES.md` and updated repository documentation to use the explicit deliverable method: deliverables, destinations, activation/build, and verification. The generated `OWLBOX.md` build remains a necessary script because `OWLBOX.md` is generated from canonical Owlbox source files.
+- 07/16/26 17:55:05: The user requested file-specific Owlbox skills for handling each OWL file type. The design rejected a generic blocker skill; instead, the Owlbox Codex implementation now uses four skills. The main `owlbox` skill handles repository-level continuity, while `owlbox-outline`, `owlbox-wisdom`, and `owlbox-legacy` encode the permanent handling headers and stop only when a requested edit would violate those file-specific rules. The Owlbox source repo and installed runtime skill directory were updated with the new skill files, and Owlbox documentation now reflects that Codex-assisted Owlbox-enabled use includes the four-skill package.
 
 ### Handoff Files
 

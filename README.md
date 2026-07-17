@@ -24,7 +24,7 @@ The Owlbox deliverable is the Owlbox file set:
 
 ## Codex Skill
 
-The Codex skill implementation lives in `codex/owlbox/`.
+The Codex skill implementation lives in four skill folders: `codex/owlbox/`, `codex/owlbox-outline/`, `codex/owlbox-wisdom/`, and `codex/owlbox-legacy/`.
 
 ## Build
 

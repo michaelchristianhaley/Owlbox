@@ -38,7 +38,7 @@ The Owlbox repository's own `OWLBOX.md` and `owlbox/` files are project continui
 
 Installed Owlbox deliverables create the Owlbox for the containing project. They do not create a nested Owlbox inside the installed Owlbox file set. Nested Owlboxes are for nested repository scopes, such as a cloned or embedded tool repository that maintains its own continuity.
 
-An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, and a documented build or maintenance method.
+An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, a documented build or maintenance method, and, for Codex-assisted use, the four Owlbox skills.
 
 ## Deliverable Method
 
@@ -141,17 +141,19 @@ After adding a handoff file to `LEGACY.md`, evaluate it and place relevant infor
 - durable settings, paths, conventions, policies, devices, and preferences go to `WISDOM.md` Preferences;
 - permanent history and the raw handoff remain in `LEGACY.md`.
 
+`LEGACY.md` Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
+
 If the handoff is not currently relevant to Plan, Journal, Current Plan, or Preferences, preserve it in `LEGACY.md` without forcing extra entries elsewhere.
 
 ## Building and Using Owlbox as a Codex Skill
 
-The Owlbox Codex skill is the operational implementation of this specification for Codex.
+The Owlbox Codex skill package is the operational implementation of this specification for Codex.
 
 Building the Owlbox skill is separate from enabling an Owlbox in a project. Building the skill produces a reusable assistant capability. Enabling an Owlbox produces a repository-local continuity file set.
 
-The Owlbox specification must be capable of reproducing the Codex Owlbox skill exactly. The repository copy in `codex/owlbox/` is the distributable skill package, and its language should not be paraphrased during copy or publication work.
+The Owlbox specification must be capable of reproducing the Codex Owlbox skills exactly. The repository copies in `codex/owlbox/`, `codex/owlbox-outline/`, `codex/owlbox-wisdom/`, and `codex/owlbox-legacy/` are the distributable skill packages, and their language should not be paraphrased during copy or publication work.
 
-The skill should:
+The main `owlbox` skill should:
 
 - trigger when a repository contains `OWLBOX.md`, `owlbox/OUTLINE.md`, `owlbox/WISDOM.md`, or `owlbox/LEGACY.md`;
 - trigger when the user asks to create, read, update, reconcile, or repair OWL files;
@@ -159,7 +161,13 @@ The skill should:
 - preserve `WISDOM.md` Preferences;
 - treat Owlbox as repository-local continuity, not external notes.
 
-The skill folder should contain:
+The file-specific skills should:
+
+- `owlbox-outline`: enforce Plan and History handling for `OUTLINE.md`;
+- `owlbox-wisdom`: enforce currentPlan, Preferences, and Additions handling for `WISDOM.md`;
+- `owlbox-legacy`: enforce Log, Handoffs, and originalPlan handling for `LEGACY.md`.
+
+The main skill folder should contain:
 
 - `SKILL.md`
 - `assets/OUTLINE.template.md`
@@ -167,5 +175,5 @@ The skill folder should contain:
 - `assets/LEGACY.template.md`
 - `scripts/build-owlbox.ps1`
 
-To install the skill for Codex, copy or sync `codex/owlbox/` into the user's Codex skills directory.
+To install the Owlbox skills for Codex, copy or sync all four `codex/owlbox*` skill folders into the user's Codex skills directory.
 

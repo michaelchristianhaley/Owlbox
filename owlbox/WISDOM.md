@@ -1,3 +1,9 @@
+currentPlan may be written to whenever a value change in the current currentPlan is accepted by the user. currentPlan may have values changed or deleted only with approval or explicit command to "change the currentPlan" syntactic language.
+Preferences may be added to at will. Preferences may have their values changed at will, but changes to preferences should trigger the assistant to question the user, unless the assistant has an unusually high degree of certainty about the change. Preferences shall never be deleted, but their value may be listed as "N/A" if a preference wanes without a new one to replace it.
+Additions shall be written to any time currentPlan or Preferences changes. Case currentPlan new entry: exactly copy the entry to Additions. Case currentPlan change value: CHANGED oldState currentState. Case currentPlan value deletion: record current state.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+
 # WISDOM.md
 
 ## Current Plan
@@ -14,6 +20,8 @@ Owlbox's deliverable method is: get the Owlbox repository, copy or create Owlbox
 
 Installed Owlbox deliverables create the Owlbox for the containing project. They do not create a nested Owlbox inside the installed Owlbox file set. Nested Owlboxes are for nested repository scopes, such as cloned or embedded tool repositories that maintain their own continuity.
 
+For Codex-assisted use, Owlbox-enabled now includes four Owlbox skills: `owlbox`, `owlbox-outline`, `owlbox-wisdom`, and `owlbox-legacy`. The main skill handles repository-level Owlbox continuity; the file-specific skills enforce the permanent handling headers for the OWL files.
+
 ## Preferences
 
 - `OWLBOX.md` is already reserved by the Owlbox system as the generated continuity view. Do not reuse it for Owlbox publication/spec content.
@@ -27,6 +35,8 @@ Installed Owlbox deliverables create the Owlbox for the containing project. They
 - The Owlbox repository's own `OWLBOX.md` and `owlbox/` files are project continuity for maintaining the Owlbox tool project.
 - `LEGACY.md` explicitly accepts entire handoff files when full context transfer matters. After adding a handoff file, evaluate it and place relevant active or durable information in `OUTLINE.md` Plan, `OUTLINE.md` Journal, `WISDOM.md` Current Plan, and `WISDOM.md` Preferences as needed. If the handoff does not affect those sections now, preserve it only in `LEGACY.md`.
 - The Owlbox specification must be capable of reproducing the Codex Owlbox skill exactly. Do not paraphrase skill or template language during copy or publication work unless an intentional spec change requires it.
+- The Codex Owlbox implementation is a four-skill package: `owlbox`, `owlbox-outline`, `owlbox-wisdom`, and `owlbox-legacy`.
+- The file-specific Owlbox skills should protect the user's will by enforcing the permanent OWL file headers without introducing a generic blocker workflow. They should stop and ask only when a requested edit would violate a file's handling rules.
 - The correct local repository base path is `C:\Users\mch\Repositories\<name>`.
 - Formal files should use "rules" rather than "commandments"; "commandment" is conversational shorthand only.
 
@@ -46,3 +56,4 @@ Installed Owlbox deliverables create the Owlbox for the containing project. They
 - 07/16/26 15:15:00: Clarified the installed-versus-nested Owlbox distinction. Installed Owlbox deliverables create the containing project's Owlbox; nested Owlboxes are for nested repository scopes, such as cloned or embedded tool repositories.
 - 07/16/26 15:45:00: Clarified Owlbox terminology. "OWL files" refers only to `OUTLINE.md`, `WISDOM.md`, and `LEGACY.md`; generated `OWLBOX.md` is an Owlbox deliverable and combined view, but not itself an OWL file.
 - 07/16/26 15:55:00: Clarified Owlbox existence versus Owlbox-enabled support. An unsupported Owlbox may exist as an `owlbox/` folder with the three OWL files, but an Owlbox-enabled project requires the supported implementation: folder, three OWL files, generated `OWLBOX.md`, and a documented build or maintenance method.
+- 07/16/26 17:55:05: Extended the Codex Owlbox implementation from one skill to four skills. `owlbox` remains the main repository-level skill, while `owlbox-outline`, `owlbox-wisdom`, and `owlbox-legacy` enforce the permanent handling headers for the three OWL files. Owlbox documentation now describes Codex-assisted Owlbox-enabled use as including all four skills.

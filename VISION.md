@@ -64,7 +64,7 @@ The Owlbox repository's own `OWLBOX.md` and `owlbox/` files are project continui
 
 Installed Owlbox deliverables create the Owlbox for the containing project. They do not create a nested Owlbox inside the installed Owlbox file set. Nested Owlboxes are for nested repository scopes, such as a cloned or embedded tool repository that maintains its own continuity.
 
-An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, and a documented build or maintenance method.
+An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, a documented build or maintenance method, and, for Codex-assisted use, the four Owlbox skills.
 
 ## Deliverable Method
 
@@ -167,17 +167,19 @@ After adding a handoff file to `LEGACY.md`, evaluate it and place relevant infor
 - durable settings, paths, conventions, policies, devices, and preferences go to `WISDOM.md` Preferences;
 - permanent history and the raw handoff remain in `LEGACY.md`.
 
+`LEGACY.md` Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
+
 If the handoff is not currently relevant to Plan, Journal, Current Plan, or Preferences, preserve it in `LEGACY.md` without forcing extra entries elsewhere.
 
 ## Building and Using Owlbox as a Codex Skill
 
-The Owlbox Codex skill is the operational implementation of this specification for Codex.
+The Owlbox Codex skill package is the operational implementation of this specification for Codex.
 
 Building the Owlbox skill is separate from enabling an Owlbox in a project. Building the skill produces a reusable assistant capability. Enabling an Owlbox produces a repository-local continuity file set.
 
-The Owlbox specification must be capable of reproducing the Codex Owlbox skill exactly. The repository copy in `codex/owlbox/` is the distributable skill package, and its language should not be paraphrased during copy or publication work.
+The Owlbox specification must be capable of reproducing the Codex Owlbox skills exactly. The repository copies in `codex/owlbox/`, `codex/owlbox-outline/`, `codex/owlbox-wisdom/`, and `codex/owlbox-legacy/` are the distributable skill packages, and their language should not be paraphrased during copy or publication work.
 
-The skill should:
+The main `owlbox` skill should:
 
 - trigger when a repository contains `OWLBOX.md`, `owlbox/OUTLINE.md`, `owlbox/WISDOM.md`, or `owlbox/LEGACY.md`;
 - trigger when the user asks to create, read, update, reconcile, or repair OWL files;
@@ -185,7 +187,13 @@ The skill should:
 - preserve `WISDOM.md` Preferences;
 - treat Owlbox as repository-local continuity, not external notes.
 
-The skill folder should contain:
+The file-specific skills should:
+
+- `owlbox-outline`: enforce Plan and History handling for `OUTLINE.md`;
+- `owlbox-wisdom`: enforce currentPlan, Preferences, and Additions handling for `WISDOM.md`;
+- `owlbox-legacy`: enforce Log, Handoffs, and originalPlan handling for `LEGACY.md`.
+
+The main skill folder should contain:
 
 - `SKILL.md`
 - `assets/OUTLINE.template.md`
@@ -193,7 +201,7 @@ The skill folder should contain:
 - `assets/LEGACY.template.md`
 - `scripts/build-owlbox.ps1`
 
-To install the skill for Codex, copy or sync `codex/owlbox/` into the user's Codex skills directory.
+To install the Owlbox skills for Codex, copy or sync all four `codex/owlbox*` skill folders into the user's Codex skills directory.
 
 
 ===== FILES.md =====
@@ -255,6 +263,8 @@ Permanent project history.
 
 `LEGACY.md` explains how the project became what it is.
 
+`LEGACY.md` Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
+
 After adding a handoff file to `LEGACY.md`, evaluate it and place relevant active or durable information in `OUTLINE.md` Plan, `OUTLINE.md` Journal, `WISDOM.md` Current Plan, and `WISDOM.md` Preferences as needed. If the handoff does not affect those sections now, preserve it only in `LEGACY.md`.
 
 ## Owlbox Repository Support Files
@@ -301,11 +311,23 @@ Executable helper scripts for generating repository artifacts.
 
 ### `codex/owlbox/`
 
-Codex skill implementation of Owlbox.
+Main Codex skill implementation of Owlbox.
 
-This is how Owlbox is packaged for Codex as an operational skill.
+This is the repository-level Owlbox continuity skill.
 
-The Owlbox repository specification must be capable of reproducing this skill exactly.
+### `codex/owlbox-outline/`
+
+Codex skill for handling `OUTLINE.md` according to its permanent header.
+
+### `codex/owlbox-wisdom/`
+
+Codex skill for handling `WISDOM.md` according to its permanent header.
+
+### `codex/owlbox-legacy/`
+
+Codex skill for handling `LEGACY.md` according to its permanent header.
+
+The Owlbox repository specification must be capable of reproducing these skills exactly.
 
 
 ===== DELIVERABLES.md =====
@@ -318,7 +340,7 @@ This file describes the Owlbox deliverable files and the method for placing them
 
 Owlbox deliverables are the continuity files and supported implementation files. The Codex Owlbox skill is a tool for creating and maintaining those files, but the skill is not required for an Owlbox to exist. An Owlbox may also be manually built from the templates, generated by script, or seeded into an assistant as project context.
 
-An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, and a documented build or maintenance method.
+An Owlbox can exist in an unsupported form as an `owlbox/` folder containing the three OWL files. A project is Owlbox-enabled only when it has the supported implementation: the `owlbox/` folder, the three OWL files, generated `OWLBOX.md`, a documented build or maintenance method, and, for Codex-assisted use, the four Owlbox skills.
 
 ## Deliverables
 
@@ -328,6 +350,10 @@ Owlbox provides:
 - `owlbox/OUTLINE.md`
 - `owlbox/WISDOM.md`
 - `owlbox/LEGACY.md`
+- `codex/owlbox/`
+- `codex/owlbox-outline/`
+- `codex/owlbox-wisdom/`
+- `codex/owlbox-legacy/`
 
 The OWL files are only:
 
@@ -358,6 +384,13 @@ Owlbox activation is supported file presence and maintenance. A project is Owlbo
 
 After changing canonical OWL files, run `scripts/build-owlbox.ps1` from the project repository root to regenerate `OWLBOX.md`.
 
+For Codex-assisted use, install or copy the four Owlbox skills:
+
+- `owlbox`
+- `owlbox-outline`
+- `owlbox-wisdom`
+- `owlbox-legacy`
+
 ## Verification
 
 Verify that:
@@ -366,7 +399,8 @@ Verify that:
 - the project contains `owlbox/WISDOM.md`;
 - the project contains `owlbox/LEGACY.md`;
 - root `OWLBOX.md` exists;
-- root `OWLBOX.md` contains the current canonical Owlbox source content.
+- root `OWLBOX.md` contains the current canonical Owlbox source content;
+- Codex-assisted environments have the four Owlbox skills available.
 
 ## Growth
 
@@ -541,6 +575,11 @@ This command runs the full local build for the Owlbox repository.
 
 ===== templates/OUTLINE.template.md =====
 
+Plan items may be written to at will. Plan items may have their values changed, but only if necessary to reflect an actual change in plan state. Plan items may be culled, but only if the plan item to be culled is no longer associated with an active task, goal, preference, etc.
+History items may be written at will. History items may never have their values changed. History items may be culled, but only if the history item to be culled is no longer associated with an active task, goal, preference, etc, AND the history item to be culled has been stale for about longer than a day. History items are marked with <STALE></STALE> flags when their associated Plan Items are all culled from Plan.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+
 # OUTLINE.md
 
 ## Plan
@@ -556,6 +595,12 @@ FIXME replace this line with paragraph(s) outlining the plan.
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
 ===== templates/WISDOM.template.md =====
+
+currentPlan may be written to whenever a value change in the current currentPlan is accepted by the user. currentPlan may have values changed or deleted only with approval or explicit command to "change the currentPlan" syntactic language.
+Preferences may be added to at will. Preferences may have their values changed at will, but changes to preferences should trigger the assistant to question the user, unless the assistant has an unusually high degree of certainty about the change. Preferences shall never be deleted, but their value may be listed as "N/A" if a preference wanes without a new one to replace it.
+Additions shall be written to any time currentPlan or Preferences changes. Case currentPlan new entry: exactly copy the entry to Additions. Case currentPlan change value: CHANGED oldState currentState. Case currentPlan value deletion: record current state.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
 
 # WISDOM.md
 
@@ -574,12 +619,20 @@ FIXME replace with durable project preferences, settings values, connection sett
 
 ===== templates/LEGACY.template.md =====
 
+Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
+Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
+originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+
 # LEGACY.md
 
 ## Log
 
 --- Newest OWL Event ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
+
+Legacy Log is permanent project history. Log may be written to at will. Log shall never have its values changed or deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
 
 ### Handoff Files
 
@@ -654,6 +707,12 @@ Before creating or restructuring an Owlbox source file, read its matching templa
 
 Preserve the headings, section order, chronology direction, and human-readable formatting defined by that template.
 
+Use the file-specific Owlbox skill for the canonical file being changed:
+
+- `owlbox-outline` for `OUTLINE.md`
+- `owlbox-wisdom` for `WISDOM.md`
+- `owlbox-legacy` for `LEGACY.md`
+
 # Owlbox Files
 
 ## OWLBOX.md
@@ -696,7 +755,7 @@ The assistant is responsible for logging changes to Additions and for keeping Cu
 
 Legacy is the permanent history of the project. It contains two sections:
 
-### Log records significant requests, decisions, actions, milestones, failures, recoveries, and other events that explain how the project reached its current state. Legacy explains how the project became what it is. Entries are chronological with date then time in the MM/DD/YY hh:mm:ss format and are intended to remain permanently.
+### Log records significant requests, decisions, actions, milestones, failures, recoveries, and other events that explain how the project reached its current state. Legacy explains how the project became what it is. Entries are chronological with date then time in the MM/DD/YY hh:mm:ss format. Log may be written to at will. Log values shall never be changed or deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
 
 Legacy may also preserve entire handoff files when full context transfer matters. After adding a handoff file to Legacy, evaluate the handoff and place relevant active information in OUTLINE.md Plan, OUTLINE.md Journal, WISDOM.md Current Plan, and WISDOM.md Preferences as needed.
 
@@ -704,7 +763,128 @@ Legacy may also preserve entire handoff files when full context transfer matters
 
 The assistant is responsible for recording significant events as they occur.
 
+===== codex/owlbox-outline/SKILL.md =====
+
+---
+name: owlbox-outline
+description: Handle Owlbox OUTLINE.md files. Use when reading, creating, editing, pruning, repairing, or reconciling owlbox/OUTLINE.md, OUTLINE.template.md, or the OUTLINE section of generated OWLBOX.md. Enforces Plan and History handling rules from the permanent OUTLINE header.
+---
+
+# Owlbox OUTLINE
+
+Use this skill for `owlbox/OUTLINE.md` and `OUTLINE.template.md`.
+
+## Permanent Header
+
+The file must begin with this permanent header. Copy it exactly when creating or repairing the file.
+
+```text
+Plan items may be written to at will. Plan items may have their values changed, but only if necessary to reflect an actual change in plan state. Plan items may be culled, but only if the plan item to be culled is no longer associated with an active task, goal, preference, etc.
+History items may be written at will. History items may never have their values changed. History items may be culled, but only if the history item to be culled is no longer associated with an active task, goal, preference, etc, AND the history item to be culled has been stale for about longer than a day. History items are marked with <STALE></STALE> flags when their associated Plan Items are all culled from Plan.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+```
+
+## Handling Rules
+
+- Treat Plan as active work state. Write Plan items freely when they reflect current work.
+- Change a Plan item only when the actual plan state changed.
+- Cull a Plan item only when it is no longer associated with an active task, goal, preference, or similar live concern.
+- Treat History as active-context history, not permanent project history.
+- Write History items freely when they matter to active work.
+- Never change the value of an existing History item.
+- Cull a History item only when it is no longer associated with active work and has been stale for about longer than a day.
+- Mark History items with `<STALE></STALE>` when their associated Plan items are all culled from Plan.
+
+## Before Editing
+
+Read the permanent header first. If the requested edit conflicts with the header, explain the conflict and ask for explicit direction before changing the file.
+
+===== codex/owlbox-wisdom/SKILL.md =====
+
+---
+name: owlbox-wisdom
+description: Handle Owlbox WISDOM.md files. Use when reading, creating, editing, repairing, or reconciling owlbox/WISDOM.md, WISDOM.template.md, Preferences, currentPlan, Additions, or the WISDOM section of generated OWLBOX.md. Enforces currentPlan, Preferences, and Additions handling rules from the permanent WISDOM header.
+---
+
+# Owlbox WISDOM
+
+Use this skill for `owlbox/WISDOM.md` and `WISDOM.template.md`.
+
+## Permanent Header
+
+The file must begin with this permanent header. Copy it exactly when creating or repairing the file.
+
+```text
+currentPlan may be written to whenever a value change in the current currentPlan is accepted by the user. currentPlan may have values changed or deleted only with approval or explicit command to "change the currentPlan" syntactic language.
+Preferences may be added to at will. Preferences may have their values changed at will, but changes to preferences should trigger the assistant to question the user, unless the assistant has an unusually high degree of certainty about the change. Preferences shall never be deleted, but their value may be listed as "N/A" if a preference wanes without a new one to replace it.
+Additions shall be written to any time currentPlan or Preferences changes. Case currentPlan new entry: exactly copy the entry to Additions. Case currentPlan change value: CHANGED oldState currentState. Case currentPlan value deletion: record current state.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+```
+
+## Handling Rules
+
+- Treat currentPlan as durable project direction.
+- Write currentPlan when the user accepts a value change.
+- Change or delete currentPlan values only with approval or explicit `change the currentPlan` syntactic language.
+- Add Preferences freely when new durable preferences, settings, paths, conventions, policies, devices, or connection methods appear.
+- Question the user before changing a Preference unless certainty is unusually high.
+- Never delete Preferences. If a preference wanes without replacement, set its value to `N/A`.
+- Write Additions any time currentPlan or Preferences changes.
+- For a new currentPlan entry, exactly copy the entry into Additions.
+- For a currentPlan value change, write `CHANGED oldState currentState`.
+- For a currentPlan value deletion, record the current state.
+
+## Before Editing
+
+Read the permanent header first. If the requested edit conflicts with the header, explain the conflict and ask for explicit direction before changing the file.
+
+===== codex/owlbox-legacy/SKILL.md =====
+
+---
+name: owlbox-legacy
+description: Handle Owlbox LEGACY.md files. Use when reading, creating, editing, repairing, or reconciling owlbox/LEGACY.md, LEGACY.template.md, Log, Handoffs, originalPlan, or the LEGACY section of generated OWLBOX.md. Enforces Log, Handoffs, and originalPlan handling rules from the permanent LEGACY header so historical values are not changed or deleted.
+---
+
+# Owlbox LEGACY
+
+Use this skill for `owlbox/LEGACY.md` and `LEGACY.template.md`.
+
+## Permanent Header
+
+The file must begin with this permanent header. Copy it exactly when creating or repairing the file.
+
+```text
+Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
+Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
+originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+```
+
+## Handling Rules
+
+- Treat Log as permanent project history.
+- Write new Log entries freely when significant requests, decisions, actions, milestones, failures, recoveries, or continuity events occur.
+- Never change an existing Log value.
+- Never delete an existing Log value.
+- Retain a handoff as a single Log entry, then evaluate it for relevant active or durable information that belongs in OUTLINE or WISDOM.
+- Treat originalPlan as the Project Seed.
+- Write originalPlan only during project initialization.
+- Never change or erase originalPlan after initialization.
+- If history is missing, write a new reconstruction Log entry that identifies the source of the recovered history.
+
+## Before Editing
+
+Read the permanent header first. If the requested edit would change or delete existing Log or originalPlan values, stop that edit and ask for explicit direction. Prefer creating a new Log entry that records the correction.
+
 ===== codex/owlbox/assets/OUTLINE.template.md =====
+
+Plan items may be written to at will. Plan items may have their values changed, but only if necessary to reflect an actual change in plan state. Plan items may be culled, but only if the plan item to be culled is no longer associated with an active task, goal, preference, etc.
+History items may be written at will. History items may never have their values changed. History items may be culled, but only if the history item to be culled is no longer associated with an active task, goal, preference, etc, AND the history item to be culled has been stale for about longer than a day. History items are marked with <STALE></STALE> flags when their associated Plan Items are all culled from Plan.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
 
 # OUTLINE.md
 
@@ -721,6 +901,12 @@ FIXME replace this line with paragraph(s) outlining the plan.
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
 ===== codex/owlbox/assets/WISDOM.template.md =====
+
+currentPlan may be written to whenever a value change in the current currentPlan is accepted by the user. currentPlan may have values changed or deleted only with approval or explicit command to "change the currentPlan" syntactic language.
+Preferences may be added to at will. Preferences may have their values changed at will, but changes to preferences should trigger the assistant to question the user, unless the assistant has an unusually high degree of certainty about the change. Preferences shall never be deleted, but their value may be listed as "N/A" if a preference wanes without a new one to replace it.
+Additions shall be written to any time currentPlan or Preferences changes. Case currentPlan new entry: exactly copy the entry to Additions. Case currentPlan change value: CHANGED oldState currentState. Case currentPlan value deletion: record current state.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
 
 # WISDOM.md
 
@@ -739,12 +925,20 @@ FIXME replace with durable project preferences, settings values, connection sett
 
 ===== codex/owlbox/assets/LEGACY.template.md =====
 
+Log may be written to at will. Log shall never have its values changed. Log shall never have its values deleted.
+Handoffs shall be retained as a single Log entry, and obey all rules of LEGACY Logs.
+originalPlan is the Project Seed, and may be written at this initialization of the project, only. originalPlan shall never have its value changed. originalPlan shall never be erased.
+
+---- ^ PERMANENT HEADER DO NOT EDIT ^ ----
+
 # LEGACY.md
 
 ## Log
 
 --- Newest OWL Event ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
+
+Legacy Log is permanent project history. Log may be written to at will. Log shall never have its values changed or deleted. If missing history is discovered later, write a reconstruction Log entry that names the source of the recovered history and preserves old entries intact.
 
 ### Handoff Files
 
@@ -844,7 +1038,7 @@ $content = @(
   "",
   "## Codex Skill",
   "",
-  'The Codex skill implementation lives in `codex/owlbox/`.',
+  'The Codex skill implementation lives in four skill folders: `codex/owlbox/`, `codex/owlbox-outline/`, `codex/owlbox-wisdom/`, and `codex/owlbox-legacy/`.',
   "",
   "## Build",
   "",
@@ -875,6 +1069,9 @@ $sources = @(
   "templates/WISDOM.template.md",
   "templates/LEGACY.template.md",
   "codex/owlbox/SKILL.md",
+  "codex/owlbox-outline/SKILL.md",
+  "codex/owlbox-wisdom/SKILL.md",
+  "codex/owlbox-legacy/SKILL.md",
   "codex/owlbox/assets/OUTLINE.template.md",
   "codex/owlbox/assets/WISDOM.template.md",
   "codex/owlbox/assets/LEGACY.template.md",
