@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The files in `templates/` are the canonical structures for creating or repairing the two editable OWL files.
+The files in `templates/` define the two editable OWL structures and the generated Legacy instruction.
 
 ## Rules
 
@@ -18,5 +18,6 @@ The files in `templates/` are the canonical structures for creating or repairing
 |---|---|---|
 | `templates/OUTLINE.template.md` | `owlbox/OUTLINE.md` | Plan, Journal |
 | `templates/WISDOM.template.md` | `owlbox/WISDOM.md` | Current Plan, Preferences, Additions |
+| `templates/LEGACY.template.md` | Generated Legacy headers | Generated-only and bidirectional-link instruction |
 
-`LEGACY.md` has no template because `scripts/hoot-hoot.ps1` generates it.
+The Legacy template contains only its generated-file handling instruction. `scripts/hoot-hoot.ps1` hard-codes that instruction and supplies link fields, headings, and Log content.

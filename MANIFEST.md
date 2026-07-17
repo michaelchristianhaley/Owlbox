@@ -7,6 +7,7 @@ This repository publishes Owlbox, a repository-local continuity system.
 ## Contents
 
 - `README.md`: generated landing page.
+- `LICENSE.md`: repository license boundary, attribution notice, and license terms.
 - `PROJECT.md`: project charter.
 - `ORIGINAL.md`: optional project seed for this repository.
 - `SOP.md`: procedure and operating specification.
@@ -22,7 +23,7 @@ This repository publishes Owlbox, a repository-local continuity system.
 - `assistant/owlbox-outline/`: OUTLINE file-handling skill.
 - `assistant/owlbox-wisdom/`: WISDOM file-handling skill.
 - `assistant/owlbox-legacy/`: LEGACY file-handling skill.
-- `scripts/`: build scripts.
+- `scripts/`: MIT-licensed build scripts and their license file.
 
 ## Rules
 
@@ -30,3 +31,4 @@ This repository publishes Owlbox, a repository-local continuity system.
 - Do not make original edits directly in generated files.
 - Keep the Owlbox deliverable separate from repository support files.
 - Keep deliverables, destinations, enablement, and verification explicit.
+- Keep the CC BY 4.0 non-script and MIT script license boundary explicit.

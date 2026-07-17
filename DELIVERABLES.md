@@ -39,6 +39,8 @@ Use the files in `templates/` when creating the two editable OWL sources.
 
 Installed deliverables describe the containing project. A cloned or embedded repository may maintain its own Owlbox for its own repository scope.
 
+Generated `old.Legacy.MMDDYYhhmm` archives are historical companions rather than OWL files or enablement requirements. Include them when transferring a Legacy chain that references them.
+
 ## Acceptance
 
 A project is Owlbox-enabled when all five Owlbox-enabled deliverables exist and `HOOT.md` reflects the current OWL files.

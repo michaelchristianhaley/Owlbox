@@ -22,6 +22,50 @@ The supported Owlbox-enabled file set is:
 
 The Owlbox repository also contains supporting documentation, templates, scripts, and assistant skill packages so other repositories and assistants can integrate Owlbox correctly.
 
+## License
+
+Non-script material is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). PowerShell scripts are licensed under the MIT License. See `LICENSE.md` for the license boundary, attribution notice, and terms.
+
+--- LICENSE.md ---
+
+# Owlbox License
+
+Copyright (c) 2026 Michael Christian Haley
+
+## Non-Script Material: CC BY 4.0
+
+Except for the scripts described below and any third-party material that is clearly marked otherwise, the material in this repository is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+When sharing or adapting that material, credit it as "Owlbox by Michael Christian Haley," link to [the Owlbox repository](https://github.com/michaelchristianhaley/Owlbox) and the license, and indicate whether changes were made.
+
+The full legal code is available at <https://creativecommons.org/licenses/by/4.0/legalcode.en>.
+
+## Scripts: MIT
+
+Every PowerShell `.ps1` file, and all original script material in any `scripts/` directory, is licensed under the MIT License. Directory-level copies of this license appear beside the script sets.
+
+MIT License
+
+Copyright (c) 2026 Michael Christian Haley
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 --- ORIGINAL.md ---
 
 # ORIGINAL.md
@@ -52,6 +96,8 @@ Owlbox is repository-local project continuity. It preserves enough active state,
 
 `LEGACY.md` is a generated, add-only Log. `hoot-hoot.ps1` records additions, changes, and removals from the two editable sources as unified-diff excerpts with two lines of surrounding context.
 
+On each run, the generator measures the resulting LEGACY as UTF-8. When it exceeds 65,536 bytes, the generator moves it to `old.Legacy.MMDDYYhhmm` and creates a new active LEGACY. The previous archive, new archive, and active LEGACY receive generated forward and backward links. Archives are generated historical companions, not OWL files, and are excluded from HOOT.
+
 `HOOT.md` is the generated combined view of all three OWL files.
 
 Never edit generated files directly.
@@ -66,6 +112,8 @@ Existing Legacy content is preserved as a pre-generation record during conversio
 4. Commit the changed source files and generated files together.
 
 The generator keeps its comparison state in Git metadata. That state is an internal cache, not an Owlbox file or deliverable.
+
+When transferring historical continuity, include every `old.Legacy.MMDDYYhhmm` file referenced by the Legacy chain.
 
 ## Enable a Repository
 
@@ -114,10 +162,11 @@ Validate in proportion to risk:
 | `owlbox/OUTLINE.md` | Editable active Plan and Journal |
 | `owlbox/WISDOM.md` | Editable durable Current Plan, Preferences, and Additions |
 | `owlbox/LEGACY.md` | Generated, add-only record of changes to OUTLINE and WISDOM |
+| `owlbox/old.Legacy.MMDDYYhhmm` | Generated historical archive linked to adjacent Legacy files |
 | `HOOT.md` | Generated combined view of the three OWL files |
 | `scripts/hoot-hoot.ps1` | Updates LEGACY and generates HOOT |
 
-The three files under `owlbox/` are the OWL files. Only OUTLINE and WISDOM are edited directly.
+The three named OWL files under `owlbox/` are the OWL files. Legacy archives are generated companions, not OWL files. Only OUTLINE and WISDOM are edited directly.
 
 ## Seed File
 
@@ -128,6 +177,7 @@ The three files under `owlbox/` are the OWL files. Only OUTLINE and WISDOM are e
 | Path | Role |
 |---|---|
 | `PROJECT.md` | Project charter and README source |
+| `LICENSE.md` | CC BY 4.0 and MIT scope, attribution, and terms |
 | `SOP.md` | Canonical operating specification |
 | `DELIVERABLES.md` | States, destinations, and acceptance criteria |
 | `TEMPLATES.md` | Template usage |
@@ -135,7 +185,7 @@ The three files under `owlbox/` are the OWL files. Only OUTLINE and WISDOM are e
 | `MANIFEST.md` | Repository inventory |
 | `templates/` | Canonical templates for editable OWL files |
 | `assistant/` | Distributable Owlbox skills |
-| `scripts/` | Generators |
+| `scripts/` | MIT-licensed generators and license file |
 | `README.md` | Generated landing page |
 | `VISION.md` | Generated publication view |
 | `HOOT.md` | This repository's generated continuity view |
@@ -185,6 +235,8 @@ Use the files in `templates/` when creating the two editable OWL sources.
 
 Installed deliverables describe the containing project. A cloned or embedded repository may maintain its own Owlbox for its own repository scope.
 
+Generated `old.Legacy.MMDDYYhhmm` archives are historical companions rather than OWL files or enablement requirements. Include them when transferring a Legacy chain that references them.
+
 ## Acceptance
 
 A project is Owlbox-enabled when all five Owlbox-enabled deliverables exist and `HOOT.md` reflects the current OWL files.
@@ -197,7 +249,7 @@ It is Owlbox-enabled, assisted when the four Owlbox skills are also available to
 
 ## Purpose
 
-The files in `templates/` are the canonical structures for creating or repairing the two editable OWL files.
+The files in `templates/` define the two editable OWL structures and the generated Legacy instruction.
 
 ## Rules
 
@@ -213,8 +265,9 @@ The files in `templates/` are the canonical structures for creating or repairing
 |---|---|---|
 | `templates/OUTLINE.template.md` | `owlbox/OUTLINE.md` | Plan, Journal |
 | `templates/WISDOM.template.md` | `owlbox/WISDOM.md` | Current Plan, Preferences, Additions |
+| `templates/LEGACY.template.md` | Generated Legacy headers | Generated-only and bidirectional-link instruction |
 
-`LEGACY.md` has no template because `scripts/hoot-hoot.ps1` generates it.
+The Legacy template contains only its generated-file handling instruction. `scripts/hoot-hoot.ps1` hard-codes that instruction and supplies link fields, headings, and Log content.
 
 --- BUILDABOX.md ---
 
@@ -239,7 +292,9 @@ powershell -ExecutionPolicy Bypass -File scripts\build-all.ps1
 
 The Legacy generator records source changes as contextual unified diffs. Its previous-source cache lives in Git metadata as `owlbox-legacy-state.json`; it is not a deliverable.
 
-On conversion from the earlier Legacy format, the generator preserves the entire existing file as a pre-generation record. Future runs only add generated source-change entries.
+The active LEGACY is limited to 65,536 UTF-8 bytes. On a generator run that finds the resulting file over that limit, the generator moves it to `old.Legacy.MMDDYYhhmm`, creates a new active LEGACY, and maintains forward and backward links across the chain. HOOT includes only the active LEGACY.
+
+On conversion from the earlier Legacy format, the generator preserves the entire existing file as a pre-generation record. Future runs only add generated source-change entries; rotation changes generated link fields without changing Log entries.
 
 Edit source files first. Commit source and generated files together.
 
@@ -293,6 +348,10 @@ FIXME replace with durable project preferences, settings values, connection sett
 --- Newest Addition ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
+--- templates/LEGACY.template.md ---
+
+LEGACY files are fully generated by `scripts/hoot-hoot.ps1` and shall never be edited directly. The generator alone maintains bidirectional links: Previous Legacy points backward and Next Legacy points forward.
+
 --- assistant/owlbox/SKILL.md ---
 
 ---
@@ -322,7 +381,8 @@ Owlbox provides repository-local project continuity.
 2. Edit OUTLINE or WISDOM under its file-specific skill.
 3. Run `scripts/hoot-hoot.ps1` after every accepted source change.
 4. Let the script add contextual source diffs to LEGACY and regenerate HOOT.
-5. Never edit LEGACY or HOOT directly.
+5. Let the script rotate LEGACY above 65,536 UTF-8 bytes and maintain bidirectional archive links.
+6. Never edit LEGACY, Legacy archives, or HOOT directly.
 
 ## File Ownership
 
@@ -331,8 +391,9 @@ Owlbox provides repository-local project continuity.
 | `OUTLINE.md` | `owlbox-outline` | Editable active Plan and Journal |
 | `WISDOM.md` | `owlbox-wisdom` | Editable durable Current Plan, Preferences, and Additions |
 | `LEGACY.md` | `owlbox-legacy` | Generated, add-only record of source changes |
+| `old.Legacy.MMDDYYhhmm` | `owlbox-legacy` | Generated historical archive linked in both directions |
 
-Use the matching asset template when creating or repairing OUTLINE or WISDOM. The generator creates LEGACY.
+Use the matching asset template when creating or repairing OUTLINE or WISDOM. The generator creates LEGACY from the generated-only instruction in `assets/LEGACY.template.md`.
 
 --- assistant/owlbox-outline/SKILL.md ---
 
@@ -401,7 +462,7 @@ After an accepted write, run `scripts/hoot-hoot.ps1` to record the change in LEG
 
 ---
 name: owlbox-legacy
-description: Protect generated Owlbox LEGACY.md files. Use when reading, generating, migrating, repairing, or being asked to edit owlbox/LEGACY.md, Log, or the LEGACY section of HOOT.md. Redirect all source changes to OUTLINE.md or WISDOM.md and let scripts/hoot-hoot.ps1 update LEGACY.
+description: Protect generated Owlbox LEGACY.md files and old.Legacy archives. Use when reading, generating, rotating, migrating, repairing, or being asked to edit owlbox/LEGACY.md, a Legacy archive, Log, or the LEGACY section of HOOT.md. Redirect source changes to OUTLINE.md or WISDOM.md and let scripts/hoot-hoot.ps1 maintain Legacy and its bidirectional archive chain.
 ---
 
 # Owlbox LEGACY
@@ -409,6 +470,8 @@ description: Protect generated Owlbox LEGACY.md files. Use when reading, generat
 `LEGACY.md` is generated by `scripts/hoot-hoot.ps1`. Never edit it directly.
 
 Existing Log entries are immutable. The generator may only add entries derived from changes to OUTLINE or WISDOM.
+
+On each run, the generator measures the resulting active LEGACY as UTF-8. Above 65,536 bytes, it moves the complete file to `old.Legacy.MMDDYYhhmm`, creates a new active LEGACY, updates the preceding archive's forward link, and writes backward and forward links into the new archive and active file. Archives are generated, immutable to direct editing, excluded from HOOT, and retained with the chain.
 
 When a requested Legacy change represents active state, edit OUTLINE. When it represents durable state or preference, edit WISDOM. Run `scripts/hoot-hoot.ps1`; it records the source diff in LEGACY with surrounding context.
 
@@ -458,7 +521,14 @@ FIXME replace with durable project preferences, settings values, connection sett
 --- Newest Addition ---
 ### FIXME: History with date then time in the MM/DD/YY hh:mm:ss format
 
+--- assistant/owlbox/assets/LEGACY.template.md ---
+
+LEGACY files are fully generated by `scripts/hoot-hoot.ps1` and shall never be edited directly. The generator alone maintains bidirectional links: Previous Legacy points backward and Next Legacy points forward.
+
 --- assistant/owlbox/scripts/hoot-hoot.ps1 ---
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Michael Christian Haley
 
 $ErrorActionPreference = "Stop"
 
@@ -478,18 +548,9 @@ $sourcePaths = @(
 $legacyPath = Join-Path $root "owlbox/LEGACY.md"
 $hootPath = Join-Path $root "HOOT.md"
 $originalPath = Join-Path $root "ORIGINAL.md"
-
-$legacyHeader = @(
-  "LEGACY.md is generated by scripts/hoot-hoot.ps1. Never edit this file directly.",
-  "New Log entries come only from changes to OUTLINE.md and WISDOM.md. Existing Log entries shall never be changed or deleted.",
-  "",
-  "---- ^ PERMANENT HEADER DO NOT EDIT ^ ----",
-  "",
-  "# LEGACY.md",
-  "",
-  "## Log",
-  ""
-) -join "`n"
+$legacyMaxBytes = 65536
+$legacyInstruction = 'LEGACY files are fully generated by `scripts/hoot-hoot.ps1` and shall never be edited directly. The generator alone maintains bidirectional links: Previous Legacy points backward and Next Legacy points forward.'
+$noLegacyLink = "None"
 
 function Normalize-Text {
   param([AllowEmptyString()][string]$Text)
@@ -503,6 +564,57 @@ function Normalize-Text {
 function Write-Utf8 {
   param([string]$Path, [string]$Text)
   [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
+}
+
+function New-LegacyText {
+  param(
+    [string]$Previous = $noLegacyLink,
+    [string]$Next = $noLegacyLink,
+    [AllowEmptyString()][string]$Log = ""
+  )
+
+  $content = @(
+    $legacyInstruction,
+    "",
+    "Previous Legacy: $Previous",
+    "Next Legacy: $Next",
+    "",
+    "---- ^ PERMANENT HEADER DO NOT EDIT ^ ----",
+    "",
+    "# LEGACY.md",
+    "",
+    "## Log"
+  ) -join "`n"
+
+  if (-not [string]::IsNullOrEmpty($Log)) {
+    $content += "`n" + $Log.TrimStart([char[]]"`r`n")
+  }
+
+  return Normalize-Text $content
+}
+
+function Get-LegacyParts {
+  param([string]$Text)
+
+  $normalized = Normalize-Text $Text
+  $logMatch = [regex]::Match($normalized, '(?ms)^## Log[ \t]*\n(.*)\z')
+  if (-not $logMatch.Success) {
+    throw "LEGACY.md does not contain a readable Log section."
+  }
+
+  $previousMatch = [regex]::Match($normalized, '(?m)^Previous Legacy: (.+)$')
+  $nextMatch = [regex]::Match($normalized, '(?m)^Next Legacy: (.+)$')
+
+  return [pscustomobject]@{
+    Previous = if ($previousMatch.Success) { $previousMatch.Groups[1].Value.Trim() } else { $noLegacyLink }
+    Next = if ($nextMatch.Success) { $nextMatch.Groups[1].Value.Trim() } else { $noLegacyLink }
+    Log = $logMatch.Groups[1].Value.TrimEnd([char[]]"`r`n")
+  }
+}
+
+function Test-LegacyArchiveName {
+  param([string]$Name)
+  return $Name -match '^old\.Legacy\.\d{10}$'
 }
 
 function Get-Sha256 {
@@ -573,19 +685,24 @@ $stateExisted = Test-Path -LiteralPath $statePath
 $legacyChanged = $false
 
 if ($legacyExisted) {
-  $legacy = Get-Content -LiteralPath $legacyPath -Raw -Encoding utf8
-  if (-not $legacy.StartsWith("LEGACY.md is generated by scripts/hoot-hoot.ps1.")) {
+  $existingLegacy = Normalize-Text (Get-Content -LiteralPath $legacyPath -Raw -Encoding utf8)
+  $isGeneratedLegacy = $existingLegacy.StartsWith("LEGACY.md is generated by scripts/hoot-hoot.ps1.") -or $existingLegacy.StartsWith($legacyInstruction)
+
+  if (-not $isGeneratedLegacy) {
     if (-not (Test-Path -LiteralPath $originalPath)) {
       throw "Create ORIGINAL.md before converting the earlier LEGACY.md format."
     }
-    $preserved = $legacy.TrimEnd([char[]]"`r`n")
-    $legacy = $legacyHeader + "### Pre-generation Legacy`n`n" + '````text' + "`n" + $preserved + "`n" + '````' + "`n"
+    $preserved = $existingLegacy.TrimEnd([char[]]"`r`n")
+    $preservedLog = "### Pre-generation Legacy`n`n" + '````text' + "`n" + $preserved + "`n" + '````'
+    $legacy = New-LegacyText -Log $preservedLog
     $legacyChanged = $true
   } else {
-    $legacy = Normalize-Text $legacy
+    $parts = Get-LegacyParts $existingLegacy
+    $legacy = New-LegacyText -Previous $parts.Previous -Next $parts.Next -Log $parts.Log
+    $legacyChanged = $legacy -ne $existingLegacy
   }
 } else {
-  $legacy = $legacyHeader
+  $legacy = New-LegacyText
   $legacyChanged = $true
 }
 
@@ -635,8 +752,47 @@ foreach ($source in $sourcePaths) {
   $legacyChanged = $true
 }
 
-if ($legacyChanged) {
-  Write-Utf8 $legacyPath (Normalize-Text $legacy)
+$legacy = Normalize-Text $legacy
+$legacyBytes = $utf8NoBom.GetByteCount($legacy)
+
+if ($legacyBytes -gt $legacyMaxBytes) {
+  $archiveName = "old.Legacy.$(Get-Date -Format 'MMddyyHHmm')"
+  $archivePath = Join-Path (Split-Path -Parent $legacyPath) $archiveName
+
+  if (Test-Path -LiteralPath $archivePath) {
+    throw "Legacy archive already exists: $archiveName"
+  }
+
+  $currentParts = Get-LegacyParts $legacy
+  $previousArchivePath = $null
+  $updatedPreviousArchive = $null
+
+  if ($currentParts.Previous -ne $noLegacyLink) {
+    if (-not (Test-LegacyArchiveName $currentParts.Previous)) {
+      throw "Invalid Previous Legacy link: $($currentParts.Previous)"
+    }
+
+    $previousArchivePath = Join-Path (Split-Path -Parent $legacyPath) $currentParts.Previous
+    if (-not (Test-Path -LiteralPath $previousArchivePath)) {
+      throw "Previous Legacy archive is missing: $($currentParts.Previous)"
+    }
+
+    $previousParts = Get-LegacyParts (Get-Content -LiteralPath $previousArchivePath -Raw -Encoding utf8)
+    $updatedPreviousArchive = New-LegacyText -Previous $previousParts.Previous -Next $archiveName -Log $previousParts.Log
+  }
+
+  $archivedLegacy = New-LegacyText -Previous $currentParts.Previous -Next "LEGACY.md" -Log $currentParts.Log
+
+  if ($null -ne $previousArchivePath) {
+    Write-Utf8 $previousArchivePath $updatedPreviousArchive
+  }
+
+  Write-Utf8 $legacyPath $archivedLegacy
+  Move-Item -LiteralPath $legacyPath -Destination $archivePath
+  $legacy = New-LegacyText -Previous $archiveName
+  Write-Utf8 $legacyPath $legacy
+} elseif ($legacyChanged) {
+  Write-Utf8 $legacyPath $legacy
 }
 
 $state = [ordered]@{
@@ -666,6 +822,9 @@ Write-Utf8 $hootPath (($hootContent -join "`n") + "`n")
 
 --- scripts/hoot-hoot.ps1 ---
 
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Michael Christian Haley
+
 $ErrorActionPreference = "Stop"
 
 if (Test-Path Variable:PSNativeCommandUseErrorActionPreference) {
@@ -684,18 +843,9 @@ $sourcePaths = @(
 $legacyPath = Join-Path $root "owlbox/LEGACY.md"
 $hootPath = Join-Path $root "HOOT.md"
 $originalPath = Join-Path $root "ORIGINAL.md"
-
-$legacyHeader = @(
-  "LEGACY.md is generated by scripts/hoot-hoot.ps1. Never edit this file directly.",
-  "New Log entries come only from changes to OUTLINE.md and WISDOM.md. Existing Log entries shall never be changed or deleted.",
-  "",
-  "---- ^ PERMANENT HEADER DO NOT EDIT ^ ----",
-  "",
-  "# LEGACY.md",
-  "",
-  "## Log",
-  ""
-) -join "`n"
+$legacyMaxBytes = 65536
+$legacyInstruction = 'LEGACY files are fully generated by `scripts/hoot-hoot.ps1` and shall never be edited directly. The generator alone maintains bidirectional links: Previous Legacy points backward and Next Legacy points forward.'
+$noLegacyLink = "None"
 
 function Normalize-Text {
   param([AllowEmptyString()][string]$Text)
@@ -709,6 +859,57 @@ function Normalize-Text {
 function Write-Utf8 {
   param([string]$Path, [string]$Text)
   [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
+}
+
+function New-LegacyText {
+  param(
+    [string]$Previous = $noLegacyLink,
+    [string]$Next = $noLegacyLink,
+    [AllowEmptyString()][string]$Log = ""
+  )
+
+  $content = @(
+    $legacyInstruction,
+    "",
+    "Previous Legacy: $Previous",
+    "Next Legacy: $Next",
+    "",
+    "---- ^ PERMANENT HEADER DO NOT EDIT ^ ----",
+    "",
+    "# LEGACY.md",
+    "",
+    "## Log"
+  ) -join "`n"
+
+  if (-not [string]::IsNullOrEmpty($Log)) {
+    $content += "`n" + $Log.TrimStart([char[]]"`r`n")
+  }
+
+  return Normalize-Text $content
+}
+
+function Get-LegacyParts {
+  param([string]$Text)
+
+  $normalized = Normalize-Text $Text
+  $logMatch = [regex]::Match($normalized, '(?ms)^## Log[ \t]*\n(.*)\z')
+  if (-not $logMatch.Success) {
+    throw "LEGACY.md does not contain a readable Log section."
+  }
+
+  $previousMatch = [regex]::Match($normalized, '(?m)^Previous Legacy: (.+)$')
+  $nextMatch = [regex]::Match($normalized, '(?m)^Next Legacy: (.+)$')
+
+  return [pscustomobject]@{
+    Previous = if ($previousMatch.Success) { $previousMatch.Groups[1].Value.Trim() } else { $noLegacyLink }
+    Next = if ($nextMatch.Success) { $nextMatch.Groups[1].Value.Trim() } else { $noLegacyLink }
+    Log = $logMatch.Groups[1].Value.TrimEnd([char[]]"`r`n")
+  }
+}
+
+function Test-LegacyArchiveName {
+  param([string]$Name)
+  return $Name -match '^old\.Legacy\.\d{10}$'
 }
 
 function Get-Sha256 {
@@ -779,19 +980,24 @@ $stateExisted = Test-Path -LiteralPath $statePath
 $legacyChanged = $false
 
 if ($legacyExisted) {
-  $legacy = Get-Content -LiteralPath $legacyPath -Raw -Encoding utf8
-  if (-not $legacy.StartsWith("LEGACY.md is generated by scripts/hoot-hoot.ps1.")) {
+  $existingLegacy = Normalize-Text (Get-Content -LiteralPath $legacyPath -Raw -Encoding utf8)
+  $isGeneratedLegacy = $existingLegacy.StartsWith("LEGACY.md is generated by scripts/hoot-hoot.ps1.") -or $existingLegacy.StartsWith($legacyInstruction)
+
+  if (-not $isGeneratedLegacy) {
     if (-not (Test-Path -LiteralPath $originalPath)) {
       throw "Create ORIGINAL.md before converting the earlier LEGACY.md format."
     }
-    $preserved = $legacy.TrimEnd([char[]]"`r`n")
-    $legacy = $legacyHeader + "### Pre-generation Legacy`n`n" + '````text' + "`n" + $preserved + "`n" + '````' + "`n"
+    $preserved = $existingLegacy.TrimEnd([char[]]"`r`n")
+    $preservedLog = "### Pre-generation Legacy`n`n" + '````text' + "`n" + $preserved + "`n" + '````'
+    $legacy = New-LegacyText -Log $preservedLog
     $legacyChanged = $true
   } else {
-    $legacy = Normalize-Text $legacy
+    $parts = Get-LegacyParts $existingLegacy
+    $legacy = New-LegacyText -Previous $parts.Previous -Next $parts.Next -Log $parts.Log
+    $legacyChanged = $legacy -ne $existingLegacy
   }
 } else {
-  $legacy = $legacyHeader
+  $legacy = New-LegacyText
   $legacyChanged = $true
 }
 
@@ -841,8 +1047,47 @@ foreach ($source in $sourcePaths) {
   $legacyChanged = $true
 }
 
-if ($legacyChanged) {
-  Write-Utf8 $legacyPath (Normalize-Text $legacy)
+$legacy = Normalize-Text $legacy
+$legacyBytes = $utf8NoBom.GetByteCount($legacy)
+
+if ($legacyBytes -gt $legacyMaxBytes) {
+  $archiveName = "old.Legacy.$(Get-Date -Format 'MMddyyHHmm')"
+  $archivePath = Join-Path (Split-Path -Parent $legacyPath) $archiveName
+
+  if (Test-Path -LiteralPath $archivePath) {
+    throw "Legacy archive already exists: $archiveName"
+  }
+
+  $currentParts = Get-LegacyParts $legacy
+  $previousArchivePath = $null
+  $updatedPreviousArchive = $null
+
+  if ($currentParts.Previous -ne $noLegacyLink) {
+    if (-not (Test-LegacyArchiveName $currentParts.Previous)) {
+      throw "Invalid Previous Legacy link: $($currentParts.Previous)"
+    }
+
+    $previousArchivePath = Join-Path (Split-Path -Parent $legacyPath) $currentParts.Previous
+    if (-not (Test-Path -LiteralPath $previousArchivePath)) {
+      throw "Previous Legacy archive is missing: $($currentParts.Previous)"
+    }
+
+    $previousParts = Get-LegacyParts (Get-Content -LiteralPath $previousArchivePath -Raw -Encoding utf8)
+    $updatedPreviousArchive = New-LegacyText -Previous $previousParts.Previous -Next $archiveName -Log $previousParts.Log
+  }
+
+  $archivedLegacy = New-LegacyText -Previous $currentParts.Previous -Next "LEGACY.md" -Log $currentParts.Log
+
+  if ($null -ne $previousArchivePath) {
+    Write-Utf8 $previousArchivePath $updatedPreviousArchive
+  }
+
+  Write-Utf8 $legacyPath $archivedLegacy
+  Move-Item -LiteralPath $legacyPath -Destination $archivePath
+  $legacy = New-LegacyText -Previous $archiveName
+  Write-Utf8 $legacyPath $legacy
+} elseif ($legacyChanged) {
+  Write-Utf8 $legacyPath $legacy
 }
 
 $state = [ordered]@{
@@ -871,6 +1116,9 @@ foreach ($source in @("owlbox/OUTLINE.md", "owlbox/WISDOM.md", "owlbox/LEGACY.md
 Write-Utf8 $hootPath (($hootContent -join "`n") + "`n")
 
 --- scripts/build-readme.ps1 ---
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Michael Christian Haley
 
 $ErrorActionPreference = "Stop"
 
@@ -925,11 +1173,15 @@ $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
 
 --- scripts/build-vision.ps1 ---
 
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Michael Christian Haley
+
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $PSScriptRoot
 $sources = @(
   "PROJECT.md",
+  "LICENSE.md",
   "ORIGINAL.md",
   "SOP.md",
   "FILES.md",
@@ -938,12 +1190,14 @@ $sources = @(
   "BUILDABOX.md",
   "templates/OUTLINE.template.md",
   "templates/WISDOM.template.md",
+  "templates/LEGACY.template.md",
   "assistant/owlbox/SKILL.md",
   "assistant/owlbox-outline/SKILL.md",
   "assistant/owlbox-wisdom/SKILL.md",
   "assistant/owlbox-legacy/SKILL.md",
   "assistant/owlbox/assets/OUTLINE.template.md",
   "assistant/owlbox/assets/WISDOM.template.md",
+  "assistant/owlbox/assets/LEGACY.template.md",
   "assistant/owlbox/scripts/hoot-hoot.ps1",
   "scripts/hoot-hoot.ps1",
   "scripts/build-readme.ps1",
@@ -977,10 +1231,12 @@ $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
 
 --- scripts/build-all.ps1 ---
 
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Michael Christian Haley
+
 $ErrorActionPreference = "Stop"
 
 & $PSScriptRoot\hoot-hoot.ps1
 & $PSScriptRoot\build-readme.ps1
 & $PSScriptRoot\build-vision.ps1
-
 

@@ -25,7 +25,8 @@ Owlbox provides repository-local project continuity.
 2. Edit OUTLINE or WISDOM under its file-specific skill.
 3. Run `scripts/hoot-hoot.ps1` after every accepted source change.
 4. Let the script add contextual source diffs to LEGACY and regenerate HOOT.
-5. Never edit LEGACY or HOOT directly.
+5. Let the script rotate LEGACY above 65,536 UTF-8 bytes and maintain bidirectional archive links.
+6. Never edit LEGACY, Legacy archives, or HOOT directly.
 
 ## File Ownership
 
@@ -34,5 +35,6 @@ Owlbox provides repository-local project continuity.
 | `OUTLINE.md` | `owlbox-outline` | Editable active Plan and Journal |
 | `WISDOM.md` | `owlbox-wisdom` | Editable durable Current Plan, Preferences, and Additions |
 | `LEGACY.md` | `owlbox-legacy` | Generated, add-only record of source changes |
+| `old.Legacy.MMDDYYhhmm` | `owlbox-legacy` | Generated historical archive linked in both directions |
 
-Use the matching asset template when creating or repairing OUTLINE or WISDOM. The generator creates LEGACY.
+Use the matching asset template when creating or repairing OUTLINE or WISDOM. The generator creates LEGACY from the generated-only instruction in `assets/LEGACY.template.md`.

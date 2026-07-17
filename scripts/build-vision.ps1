@@ -1,8 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Michael Christian Haley
+
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $PSScriptRoot
 $sources = @(
   "PROJECT.md",
+  "LICENSE.md",
   "ORIGINAL.md",
   "SOP.md",
   "FILES.md",
@@ -11,12 +15,14 @@ $sources = @(
   "BUILDABOX.md",
   "templates/OUTLINE.template.md",
   "templates/WISDOM.template.md",
+  "templates/LEGACY.template.md",
   "assistant/owlbox/SKILL.md",
   "assistant/owlbox-outline/SKILL.md",
   "assistant/owlbox-wisdom/SKILL.md",
   "assistant/owlbox-legacy/SKILL.md",
   "assistant/owlbox/assets/OUTLINE.template.md",
   "assistant/owlbox/assets/WISDOM.template.md",
+  "assistant/owlbox/assets/LEGACY.template.md",
   "assistant/owlbox/scripts/hoot-hoot.ps1",
   "scripts/hoot-hoot.ps1",
   "scripts/build-readme.ps1",

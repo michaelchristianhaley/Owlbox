@@ -19,7 +19,9 @@ powershell -ExecutionPolicy Bypass -File scripts\build-all.ps1
 
 The Legacy generator records source changes as contextual unified diffs. Its previous-source cache lives in Git metadata as `owlbox-legacy-state.json`; it is not a deliverable.
 
-On conversion from the earlier Legacy format, the generator preserves the entire existing file as a pre-generation record. Future runs only add generated source-change entries.
+The active LEGACY is limited to 65,536 UTF-8 bytes. On a generator run that finds the resulting file over that limit, the generator moves it to `old.Legacy.MMDDYYhhmm`, creates a new active LEGACY, and maintains forward and backward links across the chain. HOOT includes only the active LEGACY.
+
+On conversion from the earlier Legacy format, the generator preserves the entire existing file as a pre-generation record. Future runs only add generated source-change entries; rotation changes generated link fields without changing Log entries.
 
 Edit source files first. Commit source and generated files together.
 

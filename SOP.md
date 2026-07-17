@@ -20,6 +20,8 @@ Owlbox is repository-local project continuity. It preserves enough active state,
 
 `LEGACY.md` is a generated, add-only Log. `hoot-hoot.ps1` records additions, changes, and removals from the two editable sources as unified-diff excerpts with two lines of surrounding context.
 
+On each run, the generator measures the resulting LEGACY as UTF-8. When it exceeds 65,536 bytes, the generator moves it to `old.Legacy.MMDDYYhhmm` and creates a new active LEGACY. The previous archive, new archive, and active LEGACY receive generated forward and backward links. Archives are generated historical companions, not OWL files, and are excluded from HOOT.
+
 `HOOT.md` is the generated combined view of all three OWL files.
 
 Never edit generated files directly.
@@ -34,6 +36,8 @@ Existing Legacy content is preserved as a pre-generation record during conversio
 4. Commit the changed source files and generated files together.
 
 The generator keeps its comparison state in Git metadata. That state is an internal cache, not an Owlbox file or deliverable.
+
+When transferring historical continuity, include every `old.Legacy.MMDDYYhhmm` file referenced by the Legacy chain.
 
 ## Enable a Repository
 

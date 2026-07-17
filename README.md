@@ -14,6 +14,10 @@ The supported Owlbox-enabled file set is:
 
 The Owlbox repository also contains supporting documentation, templates, scripts, and assistant skill packages so other repositories and assistants can integrate Owlbox correctly.
 
+## License
+
+Non-script material is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). PowerShell scripts are licensed under the MIT License. See `LICENSE.md` for the license boundary, attribution notice, and terms.
+
 ## Deliverable
 
 An Owlbox-enabled project uses:
