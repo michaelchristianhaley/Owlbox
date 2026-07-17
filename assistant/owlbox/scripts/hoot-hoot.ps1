@@ -33,8 +33,41 @@ function Normalize-Text {
 }
 
 function Write-Utf8 {
-  param([string]$Path, [string]$Text)
-  [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
+  param([string]$Path, [AllowEmptyString()][string]$Text)
+
+  $bytes = $utf8NoBom.GetBytes($Text)
+  if (Test-Path -LiteralPath $Path) {
+    $existing = [System.IO.File]::ReadAllBytes($Path)
+    if ($existing.Length -eq $bytes.Length) {
+      $same = $true
+      for ($index = 0; $index -lt $bytes.Length; $index++) {
+        if ($existing[$index] -ne $bytes[$index]) {
+          $same = $false
+          break
+        }
+      }
+      if ($same) { return }
+    }
+  }
+
+  $directory = Split-Path -Parent $Path
+  $temporaryPath = Join-Path $directory (".$([System.IO.Path]::GetFileName($Path)).$([guid]::NewGuid().ToString('N')).tmp")
+  $backupPath = Join-Path $directory (".$([System.IO.Path]::GetFileName($Path)).$([guid]::NewGuid().ToString('N')).bak")
+  try {
+    [System.IO.File]::WriteAllBytes($temporaryPath, $bytes)
+    if (Test-Path -LiteralPath $Path) {
+      [System.IO.File]::Replace($temporaryPath, $Path, $backupPath)
+    } else {
+      [System.IO.File]::Move($temporaryPath, $Path)
+    }
+  } finally {
+    if (Test-Path -LiteralPath $temporaryPath) {
+      Remove-Item -LiteralPath $temporaryPath -Force -ErrorAction SilentlyContinue
+    }
+    if (Test-Path -LiteralPath $backupPath) {
+      Remove-Item -LiteralPath $backupPath -Force -ErrorAction SilentlyContinue
+    }
+  }
 }
 
 function New-LegacyText {
@@ -100,11 +133,44 @@ function Get-Sha256 {
   }
 }
 
+function Get-CommittedSource {
+  param([string]$Source)
+
+  $startInfo = [System.Diagnostics.ProcessStartInfo]::new()
+  $startInfo.FileName = "git"
+  $startInfo.Arguments = "-C `"$root`" show `"HEAD:$Source`""
+  $startInfo.UseShellExecute = $false
+  $startInfo.RedirectStandardOutput = $true
+  $startInfo.RedirectStandardError = $true
+  $startInfo.CreateNoWindow = $true
+
+  if ($startInfo.PSObject.Properties.Name -contains "StandardOutputEncoding") {
+    $startInfo.StandardOutputEncoding = $utf8NoBom
+    $startInfo.StandardErrorEncoding = $utf8NoBom
+  }
+
+  $process = [System.Diagnostics.Process]::new()
+  $process.StartInfo = $startInfo
+
+  try {
+    [void]$process.Start()
+    $output = $process.StandardOutput.ReadToEnd()
+    [void]$process.StandardError.ReadToEnd()
+    $process.WaitForExit()
+
+    if ($process.ExitCode -ne 0) { return $null }
+    return Normalize-Text $output
+  } finally {
+    $process.Dispose()
+  }
+}
+
 function Get-ContextDiff {
   param([string]$Before, [string]$After)
 
-  $beforePath = [System.IO.Path]::GetTempFileName()
-  $afterPath = [System.IO.Path]::GetTempFileName()
+  $temporaryDirectory = [System.IO.Path]::GetTempPath()
+  $beforePath = Join-Path $temporaryDirectory ("owlbox-diff-$([guid]::NewGuid().ToString('N')).before")
+  $afterPath = Join-Path $temporaryDirectory ("owlbox-diff-$([guid]::NewGuid().ToString('N')).after")
 
   try {
     Write-Utf8 $beforePath $Before
@@ -184,7 +250,8 @@ if ($stateExisted) {
   $previous["owlbox/WISDOM.md"] = [string]$state.wisdom
 } elseif ($legacyExisted) {
   foreach ($source in $sourcePaths) {
-    $previous[$source] = $current[$source]
+    $committed = Get-CommittedSource $source
+    $previous[$source] = if ($null -eq $committed) { "" } else { $committed }
   }
 } else {
   foreach ($source in $sourcePaths) {
@@ -258,8 +325,7 @@ if ($legacyBytes -gt $legacyMaxBytes) {
     Write-Utf8 $previousArchivePath $updatedPreviousArchive
   }
 
-  Write-Utf8 $legacyPath $archivedLegacy
-  Move-Item -LiteralPath $legacyPath -Destination $archivePath
+  Write-Utf8 $archivePath $archivedLegacy
   $legacy = New-LegacyText -Previous $archiveName
   Write-Utf8 $legacyPath $legacy
 } elseif ($legacyChanged) {
@@ -285,6 +351,8 @@ foreach ($source in @("owlbox/OUTLINE.md", "owlbox/WISDOM.md", "owlbox/LEGACY.md
   if (-not (Test-Path -LiteralPath $path)) {
     throw "Missing Owlbox file: $source"
   }
+  $hootContent += "--- $source ---"
+  $hootContent += ""
   $hootContent += Get-Content -LiteralPath $path -Encoding utf8
   $hootContent += ""
 }

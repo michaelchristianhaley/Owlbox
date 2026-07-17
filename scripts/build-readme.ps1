@@ -33,6 +33,7 @@ $content = $projectContent + @(
   '- `TEMPLATES.md`: template structure and usage.',
   '- `BUILDABOX.md`: build process and scripts.',
   '- `VISION.md`: generated full publication context.',
+  '- `CONTRIBUTORS.md`: project authorship and implementation credit.',
   "",
   "## Assistant Skills",
   "",
@@ -50,4 +51,32 @@ $content = $projectContent + @(
 )
 
 $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
-[System.IO.File]::WriteAllText($out, (($content -join "`n") + "`n"), $utf8NoBom)
+
+function Write-Utf8 {
+  param([string]$Path, [AllowEmptyString()][string]$Text)
+
+  $bytes = $utf8NoBom.GetBytes($Text)
+  if (Test-Path -LiteralPath $Path) {
+    $existing = [System.IO.File]::ReadAllBytes($Path)
+    if ($existing.Length -eq $bytes.Length) {
+      $same = $true
+      for ($index = 0; $index -lt $bytes.Length; $index++) {
+        if ($existing[$index] -ne $bytes[$index]) { $same = $false; break }
+      }
+      if ($same) { return }
+    }
+  }
+
+  $directory = Split-Path -Parent $Path
+  $temporaryPath = Join-Path $directory (".$([System.IO.Path]::GetFileName($Path)).$([guid]::NewGuid().ToString('N')).tmp")
+  $backupPath = Join-Path $directory (".$([System.IO.Path]::GetFileName($Path)).$([guid]::NewGuid().ToString('N')).bak")
+  try {
+    [System.IO.File]::WriteAllBytes($temporaryPath, $bytes)
+    if (Test-Path -LiteralPath $Path) { [System.IO.File]::Replace($temporaryPath, $Path, $backupPath) } else { [System.IO.File]::Move($temporaryPath, $Path) }
+  } finally {
+    if (Test-Path -LiteralPath $temporaryPath) { Remove-Item -LiteralPath $temporaryPath -Force -ErrorAction SilentlyContinue }
+    if (Test-Path -LiteralPath $backupPath) { Remove-Item -LiteralPath $backupPath -Force -ErrorAction SilentlyContinue }
+  }
+}
+
+Write-Utf8 $out (($content -join "`n") + "`n")

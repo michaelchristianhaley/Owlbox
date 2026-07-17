@@ -8,7 +8,10 @@ This repository publishes Owlbox, a repository-local continuity system.
 
 - `README.md`: generated landing page.
 - `LICENSE.md`: repository license boundary, attribution notice, and license terms.
+- `CONTRIBUTORS.md`: project authorship and implementation credit.
 - `PROJECT.md`: project charter.
+- `VERSION`: canonical release name.
+- `RELEASE.md`: release naming and tagging procedure.
 - `ORIGINAL.md`: optional project seed for this repository.
 - `SOP.md`: procedure and operating specification.
 - `FILES.md`: file descriptions.
@@ -32,3 +35,4 @@ This repository publishes Owlbox, a repository-local continuity system.
 - Keep the Owlbox deliverable separate from repository support files.
 - Keep deliverables, destinations, enablement, and verification explicit.
 - Keep the CC BY 4.0 non-script and MIT script license boundary explicit.
+- The root `owlbox/` directory is a Raven example. Its tracked `*.old` files are preserved historical records, not active source material.

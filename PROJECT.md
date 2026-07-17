@@ -1,5 +1,7 @@
 # Owlbox
 
+Owlbox Alpha 0.1.3
+
 Owlbox is a repository-local continuity system for long-lived projects.
 
 An Owlbox preserves the plan, durable knowledge, preferences, and permanent history needed for a competent human or assistant to understand and continue a project without relying on chat history.

@@ -14,6 +14,12 @@ Owlbox is repository-local project continuity. It preserves enough active state,
 
 `ORIGINAL.md` is an optional seed file. It is outside all three states.
 
+## Repository Example
+
+The root `owlbox/` directory in this public repository contains a Raven example, not continuity for maintaining Owlbox itself. Do not copy its active files or preserved `.old` records into another project.
+
+When repurposing a clone of this repository as a project rather than using it as the Owlbox source repository, remove the Raven example directory and root `HOOT.md`, then create fresh editable OWL sources from `templates/` and run the generator.
+
 ## Ownership
 
 `OUTLINE.md` and `WISDOM.md` are the editable OWL sources.
@@ -35,11 +41,13 @@ Existing Legacy content is preserved as a pre-generation record during conversio
 3. Run `scripts/hoot-hoot.ps1`.
 4. Commit the changed source files and generated files together.
 
-The generator keeps its comparison state in Git metadata. That state is an internal cache, not an Owlbox file or deliverable.
+The generator keeps its comparison state in Git metadata. That state is an internal cache, not an Owlbox file or deliverable. When the cache is absent, the generator compares against the source files in Git's current commit. A source absent from that commit is treated as new.
 
 When transferring historical continuity, include every `old.Legacy.MMDDYYhhmm` file referenced by the Legacy chain.
 
 ## Enable a Repository
+
+Prerequisite: Git must be installed and available on `PATH`. `hoot-hoot.ps1` uses Git to compare OWL sources and maintain generated LEGACY history.
 
 1. Create `owlbox/`.
 2. Create `OUTLINE.md` and `WISDOM.md` from `templates/`.
@@ -65,7 +73,7 @@ Assisted use installs all four Owlbox skills:
 - `owlbox-wisdom`
 - `owlbox-legacy`
 
-The distributable skill packages live under `assistant/`. Copy them without paraphrasing.
+The distributable skill packages live under `assistant/`. Copy the four folders without paraphrasing into the active Codex skills directory for the target environment. The exact runtime location is environment-specific; verify the target Codex installation's skill location before copying. Keep the four folders together so all OWL handling rules are available.
 
 ## Validation
 

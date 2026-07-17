@@ -13,6 +13,8 @@
 
 The three named OWL files under `owlbox/` are the OWL files. Legacy archives are generated companions, not OWL files. Only OUTLINE and WISDOM are edited directly.
 
+This repository's root OWL files are a Raven example. The tracked `*.old` files beside them are preserved historical records of Owlbox development, not active sources, templates, or generated Legacy archives. Do not copy either the Raven example or the `.old` records into another project.
+
 ## Seed File
 
 `ORIGINAL.md` may preserve the original project plan. It is not an OWL file and does not affect Owlbox, Owlbox-enabled, or Owlbox-enabled assisted status.
@@ -22,6 +24,8 @@ The three named OWL files under `owlbox/` are the OWL files. Legacy archives are
 | Path | Role |
 |---|---|
 | `PROJECT.md` | Project charter and README source |
+| `VERSION` | Canonical release name |
+| `RELEASE.md` | Release naming and tagging procedure |
 | `LICENSE.md` | CC BY 4.0 and MIT scope, attribution, and terms |
 | `SOP.md` | Canonical operating specification |
 | `DELIVERABLES.md` | States, destinations, and acceptance criteria |
